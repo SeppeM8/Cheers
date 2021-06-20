@@ -1,0 +1,64 @@
+
+.create-container {
+  height: 100px;
+  position: relative;
+}
+
+.data {
+  float:left;
+  margin: 0;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.avatar {
+  overflow: hidden;
+  margin: 0;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  height: 100px;
+}
+
+.avatar img:hover{
+  transform: scale(1.1);
+}
+
+.avatar img {
+  height: 80%;
+  margin: 10px;
+  overflow: hidden;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  padding: 10px;
+}
+
+.grid-item {
+  padding: 10px;
+  height: 130px;
+  margin: 0 auto;
+}
+
+.user-item {
+  height: 50px;
+  margin-top: 5px;
+}
+
+.mini-avatar {
+  float: left;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.name {
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
