@@ -1,5 +1,5 @@
 import React from 'react';
-import './Users.css';
+import './CreatePlayers.css';
 
 
 function importAll(r) {
@@ -12,11 +12,11 @@ function importAll(r) {
 
 const images = importAll(require.context('./Avatars', false, /\.(png|jpe?g|svg)$/));
 
-class CreateUsers extends React.Component {
+class CreatePlayers extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      users: [],
+      players: [],
       male: true,
       name: '',
       avatar: 'Dummie.png',
@@ -24,27 +24,31 @@ class CreateUsers extends React.Component {
     }    
 
     this.handleChange = this.handleChange.bind(this);
-    this.addUser = this.addUser.bind(this);
+    this.addPlayer = this.addPlayer.bind(this);
     this.play = this.play.bind(this);
     this.choseAvatar = this.choseAvatar.bind(this);
     this.pickAvatar = this.pickAvatar.bind(this);
     this.availableAvatars = this.availableAvatars.bind(this);
-    this.editUser = this.editUser.bind(this);
+    this.editPlayer = this.editPlayer.bind(this);
 
-    this.state.users = [
+
+    // DEBUG =======
+    this.state.players = [
       {name: 'Seppe', male: true, avatar: 'Avatar01.png'},
       {name: 'Falco', male: true, avatar: 'Avatar02.png'},
-      {name: 'Laura', male: false, avatar: 'Avatar05.png'},
-      {name: 'Ward', male: true, avatar: 'Avatar03.png'},
+      {name: 'Laura', male: false, avatar: 'Avatar03.png'},
+      {name: 'Ward', male: true, avatar: 'Avatar05.png'},
       {name: 'Cato', male: false, avatar: 'Avatar04.png'},
     ];
+    this.play();
+    // =============
   }
 
   handleChange(event) {
     this.setState({name: event.target.value});
   }
 
-  addUser() {
+  addPlayer() {
     // Check of naam ingevuld is
     if (this.state.name.length === 0) {
       alert("Geen naam ingegeven");
@@ -52,7 +56,7 @@ class CreateUsers extends React.Component {
     }
 
     // Check of naam al bestaat
-    for (var existing of this.state.users) {
+    for (var existing of this.state.players) {
       if (this.state.name === existing.name) {
         alert("Naam bestaat al");
         return
@@ -65,16 +69,16 @@ class CreateUsers extends React.Component {
       return
     }
 
-    const newUsers = this.state.users.concat({name: this.state.name, male: this.state.male, avatar: this.state.avatar});
-    this.setState({users: newUsers, name: '', male: true, avatar: "Dummie.png"});
+    const newPlayers = this.state.players.concat({name: this.state.name, male: this.state.male, avatar: this.state.avatar});
+    this.setState({players: newPlayers, name: '', male: true, avatar: "Dummie.png"});
   }
 
   play() {
-    if (this.state.users.length < 2) {
+    if (this.state.players.length < 2) {
       alert('Te weinig spelers');
       return;
     }
-    this.props.startGame(this.state.users);
+    this.props.startGame(this.state.players);
   }
 
   choseAvatar() {
@@ -93,20 +97,20 @@ class CreateUsers extends React.Component {
         all.push(key);
       }
     }
-    for (var user of this.state.users) {
-      all.splice(all.indexOf(user.avatar), 1);
+    for (var player of this.state.players) {
+      all.splice(all.indexOf(player.avatar), 1);
     }
     return all;
   }
 
-  editUser(editUser) {
-    var users = [];
-    for (var user of this.state.users) {
-      if (user.name !== editUser.name) {
-        users.push(user);
+  editPlayer(editPlayer) {
+    var players = [];
+    for (var player of this.state.players) {
+      if (player.name !== editPlayer.name) {
+        players.push(player);
       }
     }
-    this.setState({users: users, name: editUser.name, male: editUser.male, avatar: editUser.avatar});
+    this.setState({players: players, name: editPlayer.name, male: editPlayer.male, avatar: editPlayer.avatar});
   }
 
   render() {
@@ -120,7 +124,7 @@ class CreateUsers extends React.Component {
 
     return (
       <div style={{margin: '10px'}}>
-          {this.state.users.map((user) => <UserItem key={user.name} user={user} onClick={(user) => this.editUser(user)}/>)}
+          {this.state.players.map((player) => <PlayerItem key={player.name} player={player} onClick={(player) => this.editPlayer(player)}/>)}
         <div className='create-container'>
           <div className='data'>
 
@@ -132,7 +136,7 @@ class CreateUsers extends React.Component {
               {this.state.male ? 'Man' : 'Vrouw'}
             </button>
 
-            <button onClick={() => this.addUser()}>
+            <button onClick={() => this.addPlayer()}>
               Voeg toe
             </button>
           </div>
@@ -146,12 +150,12 @@ class CreateUsers extends React.Component {
   }
 }
 
-class UserItem extends React.Component {
+class PlayerItem extends React.Component {
   render() {
     return (
-      <div className='user-item' onClick={() => this.props.onClick(this.props.user)}>
-        <img className='mini-avatar' key={this.props.user.avatar} src={images[this.props.user.avatar].default} alt={this.props.user.avatar}/>
-        <div className='name'>{this.props.user.name} {this.props.user.male ? "(M)" : "(V)"}</div>
+      <div className='player-item' onClick={() => this.props.onClick(this.props.player)}>
+        <img className='mini-avatar' key={this.props.player.avatar} src={images[this.props.player.avatar].default} alt={this.props.player.avatar}/>
+        <div className='name'>{this.props.player.name} {this.props.player.male ? "(M)" : "(V)"}</div>
       </div>
     )
   }
@@ -170,4 +174,4 @@ class AvatarPicker extends React.Component {
   }
 }
 
-export {CreateUsers}
+export {CreatePlayers}

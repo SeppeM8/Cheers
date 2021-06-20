@@ -1,0 +1,24 @@
+
+.playerbar {
+  width: 100%;
+  text-align: center;
+}
+
+.playerbar-items {
+  list-style-type: none;
+  overflow: hidden;
+  display: inline-block
+}
+
+.playerbar-item {
+  float: left;
+  margin: 10px;
+  text-align: center;
+}
+
+.playerbar-item img {
+  height: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

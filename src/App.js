@@ -1,5 +1,6 @@
 import './App.css';
-import {CreateUsers} from './Users.js'
+import {CreatePlayers} from './CreatePlayers.js';
+import {Game} from './Game.js';
 import React from 'react';
 
 
@@ -8,26 +9,24 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {createUsers: true}
+    this.state = {createPlayers: true}
 
     this.startGame = this.startGame.bind(this);
   }
 
-  startGame(users) {
-    this.setState({users: users, createUsers: false});
+  startGame(players) {
+    this.setState({players: players, createPlayers: false});
   }
 
   render() {
-    if (this.state.createUsers) {
+    if (this.state.createPlayers) {
       return (
-        <CreateUsers startGame={(users) => this.startGame(users)}></CreateUsers>
+        <CreatePlayers startGame={(players) => this.startGame(players)}></CreatePlayers>
       );
     }
 
     return (
-      <div>
-        {JSON.stringify(this.state.users)}
-      </div>
+      <Game players={this.state.players}></Game>
     )
   }
 }
