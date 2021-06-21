@@ -1,0 +1,3 @@
+# min;max;opdracht;samenvatting met: 0 = slokken
+1;5;Wie betrapt wordt met zijn telefoon in de hand drinkt {0};GSM = {0}
+1;1;Alle slokken zijn dubbel;Dubbele slokken

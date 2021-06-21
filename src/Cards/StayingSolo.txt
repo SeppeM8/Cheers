@@ -1,0 +1,6 @@
+# min;max;opdracht;samenvatting met: 0 = slokken, 1 = persoon, 2 = man
+1;2;Spreek geen Nederlands {1}, Als je betrapt wordt: drink {0};Als {1} Nederlands praat: {0}
+1;1;Leugenaar! Als iemand {1} betrapt op de waarheid, drinkt {2, choice, 0#hij|1#zij} {0}; Als {1} de waarheid zegt: {0}
+3;5;Elke keer {1} {2, choice, 0#zijn|1#haar} glas wilt bijvullen, moet {2, choice, 0#hij|1#zij} bewijzen dat {2, choice, 0#zijn|1#haar} glas leeg is door het omgekeerd boven {2, choice, 0#zijn|1#haar} hoofd te houden. Indien vergeten: adje; Als {1} {2, choice, 0#zijn|1#haar} glas leeg is: Boven hoofd, anders adje
+2;4;{1} is duimkoning. Als hij zijn duim op tafel legt moet iedereen volgen. Wie laatst is drinkt {0};{1} de duimkoning
+1;2;{1} wordt vanaf nu aangesproken met {2, choice, 0#meneer|1#mevrouw} de geweldige superieure toffe mens, de eerste die dit niet doet moet op zijn knieën om vergiffenis vragen; Spreek {1} aan met {2, choice, 0#meneer|1#mevrouw} de geweldige superieure toffe mens, anders om vergiffenis vragen

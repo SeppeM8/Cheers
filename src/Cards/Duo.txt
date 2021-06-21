@@ -1,0 +1,14 @@
+# 0 = slokken, 1 = player1, 2 = player2, 3 = man1, 4 = man2
+{1} en {2} wisselen een kledingstuk
+{1} mag iets tekenen op {2}
+{1} en {2}, geef elkaar een zoentje
+{1} drinkt zoveel slokken als {3, choice, 0#hij|1#zij} wilt, {2} drinkt er dubbel zoveel
+{1}, doe wat {2} zegt, als je het niet kan, drink {0}
+{1} en {2} wisselen van gsm en verzenden een bericht
+{1} en {2}, Neem om ter eerst een slok zonder handen of armen te gebruiken
+{1} wissel van plaats met {2}
+{1} en {2}, doe de macarena, de groep beslist wie het het meest sexy uitvoert. De verliezer verliest een kledingstuk
+{1} doe een bodyshot bij {2}
+{1} en {2} drinken om de beurt van {1} zijn glas, degene die het glas eindigt mag een opdracht skippen
+{1} en {2}, maak een papieren vliegtuigje. Wie het verste vliegt mag {0} uidelen
+{1}, wissel je glas met {2}

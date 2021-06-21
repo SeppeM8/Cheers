@@ -1,0 +1,3 @@
+# min;max;opdracht;samenvatting met: 0 = slokken, 1 = player1, 2 = player2, 3 = man1, 4 = man2
+3;7;{1} en {2} zijn drinkpartners;{1} en {2} zijn drinkpartners
+1;2;{1} en {2} moeten elkaars handen vasthouden;{1} en {2} moeten handen vasthouden
