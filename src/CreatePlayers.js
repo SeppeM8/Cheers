@@ -33,14 +33,16 @@ class CreatePlayers extends React.Component {
 
 
     // DEBUG =======
-    this.state.players = [
-      {name: 'Seppe', male: true, avatar: 'Avatar01.png'},
-      {name: 'Falco', male: true, avatar: 'Avatar02.png'},
-      {name: 'Laura', male: false, avatar: 'Avatar03.png'},
-      {name: 'Ward', male: true, avatar: 'Avatar05.png'},
-      {name: 'Cato', male: false, avatar: 'Avatar04.png'},
-    ];
-    this.play();
+    if (true) {
+      this.state.players = [
+        {name: 'Seppe', male: true, avatar: 'Avatar01.png'},
+        {name: 'Falco', male: true, avatar: 'Avatar02.png'},
+        {name: 'Laura', male: false, avatar: 'Avatar03.png'},
+        {name: 'Ward', male: true, avatar: 'Avatar05.png'},
+        {name: 'Cato', male: false, avatar: 'Avatar04.png'},
+      ];
+      this.play();
+    }
     // =============
   }
 

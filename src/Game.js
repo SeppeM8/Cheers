@@ -1,6 +1,7 @@
 import React from 'react';
 import './Game.css';
-import {SoloFacotry} from './Cards.js';
+import {DuoFactory, GroupFactory, NhieFactory, SoloFactory} from './Cards.js';
+import background from './Images/Background.jpg';
 
 function importAll(r) {
   var images = {}
@@ -16,7 +17,10 @@ class Game extends React.Component{
   constructor(props) {
     super(props);
 
-    this.soloFac = new SoloFacotry();
+    this.soloFac = new SoloFactory();
+    this.duoFac = new DuoFactory();
+    this.groupFac = new GroupFactory();
+    this.nhieFac = new NhieFactory();
 
     this.players = [];
     for (var player of this.props.players){
@@ -25,8 +29,22 @@ class Game extends React.Component{
 
     this.state = {currentPlayers: []};
 
-    
+
+    this.getSlokken = this.getSlokken.bind(this);
     this.nextCard = this.nextCard.bind(this);
+  }
+
+  getSlokken() {
+    const rand = Math.random();
+    if (rand < 0.25) {
+      return '1 slok';
+    } else if (rand < 0.5) {
+      return '2 slokken';
+    } else if (rand < 0.75) {
+      return '3 slokken';
+    } else {
+      return 'een adje';
+    }
   }
 
   nextPlayers(number) {
@@ -70,19 +88,43 @@ class Game extends React.Component{
   }
 
   nextCard() {
-    const players = this.nextPlayers(1);
-    const card = this.soloFac.getCard("2 slokken", players[0].name, players[0].male);
-    this.setState({currentCard: card, currentPlayers: players});
+    const type = Math.floor(Math.random() * 4);;
+
+    if (type === 0) {
+      const players = this.nextPlayers(1);
+      const card = this.soloFac.getCard(this.getSlokken(), players[0].name, players[0].male);
+      this.setState({currentCard: card, currentPlayers: players});
+    } else if (type === 1) {
+      const players = this.nextPlayers(2);
+      const card = this.duoFac.getCard(this.getSlokken(), players[0].name, players[1].name, players[0].male, players[1].male);
+      this.setState({currentCard: card, currentPlayers: players});
+    } else if (type === 2) {
+      const players = this.players.slice().map(x => x.player);
+      const card = this.groupFac.getCard(this.getSlokken());
+      this.setState({currentCard: card, currentPlayers: players});
+    } else if (type === 3) {
+      const players = this.players.slice().map(x => x.player);
+      const card = this.nhieFac.getCard(this.getSlokken());
+      this.setState({currentCard: card, currentPlayers: players});      
+    }
   }
+
 
   render() {
     return (
       <div>
         <Playerbar players={this.props.players} currentPlayers={this.state.currentPlayers}></Playerbar>
-        <div className="card-container">
-          <div>{this.state.currentCard}</div>
+        <div className='cards-field'>
+          <div className='current-card'>
+            {this.state.currentCard}
+          </div>
+          <div className='staying-cards'>
+
+          </div>
         </div>
-        <button onClick={() => this.nextCard()}>Next</button>
+        <div className='button-box'>
+          <button onClick={() => this.nextCard()}>Next</button>
+        </div>
       </div>
     );
   }
