@@ -14,7 +14,8 @@ const images = importAll(require.context('./Avatars', false, /\.(png|jpe?g|svg)$
 
 class CreatePlayers extends React.Component {
   constructor(props) {
-    super(props);
+    super(props);   
+
     this.state={
       players: [],
       male: true,
@@ -41,7 +42,7 @@ class CreatePlayers extends React.Component {
         {name: 'Ward', male: true, avatar: 'Avatar05.png'},
         {name: 'Cato', male: false, avatar: 'Avatar04.png'},
       ];
-      this.play();
+      //this.play();
     }
     // =============
   }
@@ -88,7 +89,6 @@ class CreatePlayers extends React.Component {
   }
 
   pickAvatar(avatar) {
-    console.log(avatar);
     this.setState({avatar: avatar, avatarPicker: false});
   }
 
@@ -113,7 +113,7 @@ class CreatePlayers extends React.Component {
       }
     }
     this.setState({players: players, name: editPlayer.name, male: editPlayer.male, avatar: editPlayer.avatar});
-  }
+  }  
 
   render() {
     if (this.state.avatarPicker) {
@@ -144,6 +144,7 @@ class CreatePlayers extends React.Component {
           </div>
           <div className='avatar'><img src={images[this.state.avatar].default} onClick={() => this.choseAvatar()} alt='Avatar'/></div>          
         </div>
+        <CardSettings settings={this.props.settings} changeSetting={this.props.changeSetting} cardCounts={this.props.cardCounts}/>      
         <div>
           <button onClick={() => this.play()}> Start</button>
         </div>
@@ -174,6 +175,40 @@ class AvatarPicker extends React.Component {
       </div>
     )
   }
+}
+
+class CardSettings extends React.Component {
+
+  render() {
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <td>Solo</td>
+            <td title={this.props.cardCounts.solo + " Cards available"}><input type="range" min="0" max="100" value={this.props.settings.solo} id="solo" onChange={(e) => this.props.changeSetting("solo", e.target.value)}/></td>
+          </tr>
+          <tr>
+            <td>Duo</td>
+            <td title={this.props.cardCounts.duo + " Cards available"}><input type="range" min="0" max="100" value={this.props.settings.duo} id="duo" onChange={(e) => this.props.changeSetting("duo", e.target.value)}/></td>
+          </tr>
+          <tr>
+            <td>Group</td>
+            <td title={this.props.cardCounts.group + " Cards available"}><input type="range" min="0" max="100" value={this.props.settings.group} id="group" onChange={(e) => this.props.changeSetting("group", e.target.value)}/></td>
+          </tr>
+          <tr>
+            <td>Staying solo</td>
+            <td title={this.props.cardCounts.stayingSolo + " Cards available"}><input type="range" min="0" max="100" value={this.props.settings.stayingSolo} id="stayingSolo" onChange={(e) => this.props.changeSetting("stayingSolo", e.target.value)}/></td>
+          </tr>
+          <tr>
+            <td>Never Have I Ever</td>
+            <td title={this.props.cardCounts.nhie + " Cards available"}><input type="range" min="0" max="100" value={this.props.settings.nhie} id="nhie" onChange={(e) => this.props.changeSetting("nhie", e.target.value)}/></td>
+          </tr>
+        </tbody>
+      </table>
+    )
+  }
+      
+
 }
 
 export {CreatePlayers}

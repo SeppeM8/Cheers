@@ -1,42 +1,94 @@
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  width: 70%;
-  margin-left: 20px;
+  width: 100%;
   margin-right: 20px;
-  padding: 10px;
   border-radius: 40px;
   height: 60vh;
-  line-height: 60vh;
+  color: white;
+  text-align: center;
 }
 
 .card span {
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
+  font-size: 1vw;
+  text-align: center;
+  margin: 10px;
+}
+
+.card-mini {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  width: 92%;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  color: white;
+  line-height: 10vh;
+  background-color: maroon;
+  text-align: center;
+}
+
+.card-mini span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  text-align: center;
 }
 
 .solo-card {
-  font-size: 3.8vw;  
-  text-align: center;
-  background-color: yellow;
+  line-height: 60vh;
+  background-color: darkgoldenrod;
 }
 
-.duo-card{
+.solo-card span {
   font-size: 3.8vw;  
   text-align: center;
+}
+
+.duo-card {
   background-color: red;
+  line-height: 60vh;
 }
 
-.group-card{
+.duo-card span {
   font-size: 3.8vw;  
   text-align: center;
+}
+
+.group-card {
   background-color: blue;
+  line-height: 60vh;
 }
 
-.nhie-card{
+.group-card span {
   font-size: 3.8vw;  
   text-align: center;
+}
+
+.nhie-card { 
   background-color: black;
   color: white;
+}
+
+.nhie-title {
+  margin-left: 10px;
+  font-size: 4vw;
+}
+
+.nhie-text span{
+  font-size: 3.5vw;  
+  text-align: center;
+  margin-top: 3.8vw;
+}
+
+.staying-solo-card {
+  line-height: 60vh;
+  background-color: maroon;
+}
+
+.staying-solo-card span {
+  font-size: 3.8vw;  
+  text-align: center;
 }

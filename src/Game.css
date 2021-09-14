@@ -8,13 +8,14 @@
 .playerbar-items {
   list-style-type: none;
   overflow: hidden;
-  display: inline-block
+  display: inline-block;
 }
 
 .playerbar-item {
   float: left;
   padding: 10px;
   text-align: center;
+  color: white;
 }
 
 .playerbar-item img {
@@ -33,4 +34,24 @@
 
 .button-box {
   height: 10vh;
+}
+
+.game {
+  padding: 10px;
+}
+
+.cards-field {
+  width: 100%;
+  overflow: hidden;
+}
+
+.current-card {
+  width: 78%;
+  float: left;
+}
+
+.staying-cards {
+  width: 20%;
+  float: right;
+  overflow: hidden;
 }
