@@ -1,1 +1,65 @@
 
+.title {
+  font-size: 70px;
+  font-family: 'Trebuchet MS';
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.slider-box {
+  margin-bottom: 10px;
+}
+
+.slider-title {
+  position: relative;
+  right: 10px;
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 200px;
+  height: 20px;
+  background: linear-gradient(90deg, rgba(105,78,181,1) 0%, rgba(176,32,120,1) 100% );
+  border: 2px solid white;
+  border-radius: 20px;
+  opacity: 0.8;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #03fcf0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.reset-button {
+  height: 50px;  
+  float: left;
+}
+
+.save-button {
+  height: 65px;
+  margin-left: 70px;  
+}
+
+

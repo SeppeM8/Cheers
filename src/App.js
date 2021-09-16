@@ -1,8 +1,9 @@
 import './App.css';
-import {CreatePlayers, CardSettings} from './CreatePlayers.js';
+import {CreatePlayers} from './CreatePlayers.js';
 import {Game} from './Game.js';
 import React from 'react';
 import {getCardCounts} from './Cards.js';
+import { SettingsScreen } from './Settings';
 
 
 
@@ -11,6 +12,29 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    var settings = this.resetSettings(true);
+
+    this.state = {
+      createPlayers: true,
+      settingScreen: false,
+      settings: settings,
+      cardCounts: getCardCounts()
+    }
+
+    this.startGame = this.startGame.bind(this);
+    this.changeSetting = this.changeSetting.bind(this);
+    this.gotoSettings = this.gotoSettings.bind(this);
+    this.resetSettings = this.resetSettings.bind(this);
+  }
+
+  changeSetting(key, value) { 
+    var settings = this.state.settings;
+    settings.total += value - settings[key];
+    settings[key] = parseFloat(value);
+    this.setState({settings: settings});
+  }  
+
+  resetSettings(init) {
     const counts = getCardCounts();
     var max = 0;
     var key;
@@ -27,26 +51,13 @@ class App extends React.Component {
     }
     settings.total = total;
 
-    this.state = {
-      createPlayers: true,
-      settingScreen: false,
-      settings: settings,
-      cardCounts: counts
+    if (init) {
+      return settings;
+    } else {
+      this.setState({settings: settings, cardCounts: counts});
     }
 
-
-
-    this.startGame = this.startGame.bind(this);
-    this.changeSetting = this.changeSetting.bind(this);
-    this.gotoSettings = this.gotoSettings.bind(this);
   }
-
-  changeSetting(key, value) { 
-    var settings = this.state.settings;
-    settings.total += value - settings[key];
-    settings[key] = parseFloat(value);
-    this.setState({settings: settings});
-  }  
 
   startGame(players) {
     this.setState({players: players, settings: this.state.settings,createPlayers: false});
@@ -67,8 +78,13 @@ class App extends React.Component {
     if (this.state.settingScreen) {
       return (
         <div>
-          <CardSettings settings={this.state.settings} changeSetting={this.changeSetting} cardCounts={this.state.cardCounts}/>
-          <button onClick={() => this.gotoSettings(false)}> Save</button>
+          <SettingsScreen 
+            settings={this.state.settings}
+            changeSetting={this.changeSetting}
+            cardCounts={this.state.cardCounts}
+            resetSettings={this.resetSettings}
+            gotoSettings={this.gotoSettings}
+          />
         </div>
       )
     }

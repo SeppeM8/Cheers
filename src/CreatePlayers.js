@@ -53,7 +53,7 @@ class CreatePlayers extends React.Component {
         {name: 'Jordy', male: true, avatar: 'Avatar08.png'},
         {name: 'Alice', male: false, avatar: 'Avatar07.png'},
       ];
-      //this.play();
+      this.play();
     }
     // =============
   }
@@ -184,7 +184,7 @@ class CreatePlayers extends React.Component {
             </div> 
             <div className="hbox"> 
               <img className="play-button button" src={play} alt="Play" onClick={() => this.play()}/>
-              <img className="settings-button button" src={gear} alt="Settings" onClick={() => console.log("hi")}/>
+              <img className="settings-button button" src={gear} alt="Settings" onClick={() => this.props.gotoSettings(true)}/>
             </div>
         </div>
       </div>
@@ -216,38 +216,4 @@ class AvatarPicker extends React.Component {
   }
 }
 
-class CardSettings extends React.Component {
-
-  render() {
-    return (
-      <table>
-        <tbody>
-          <tr>
-            <td>Solo</td>
-            <td title={this.props.cardCounts.solo + " Cards available"}><input type="range" min="0" max="100" value={this.props.settings.solo} id="solo" onChange={(e) => this.props.changeSetting("solo", e.target.value)}/></td>
-          </tr>
-          <tr>
-            <td>Duo</td>
-            <td title={this.props.cardCounts.duo + " Cards available"}><input type="range" min="0" max="100" value={this.props.settings.duo} id="duo" onChange={(e) => this.props.changeSetting("duo", e.target.value)}/></td>
-          </tr>
-          <tr>
-            <td>Group</td>
-            <td title={this.props.cardCounts.group + " Cards available"}><input type="range" min="0" max="100" value={this.props.settings.group} id="group" onChange={(e) => this.props.changeSetting("group", e.target.value)}/></td>
-          </tr>
-          <tr>
-            <td>Staying solo</td>
-            <td title={this.props.cardCounts.stayingSolo + " Cards available"}><input type="range" min="0" max="100" value={this.props.settings.stayingSolo} id="stayingSolo" onChange={(e) => this.props.changeSetting("stayingSolo", e.target.value)}/></td>
-          </tr>
-          <tr>
-            <td>Never Have I Ever</td>
-            <td title={this.props.cardCounts.nhie + " Cards available"}><input type="range" min="0" max="100" value={this.props.settings.nhie} id="nhie" onChange={(e) => this.props.changeSetting("nhie", e.target.value)}/></td>
-          </tr>
-        </tbody>
-      </table>
-    )
-  }
-      
-
-}
-
-export {CreatePlayers, CardSettings}
+export {CreatePlayers}
