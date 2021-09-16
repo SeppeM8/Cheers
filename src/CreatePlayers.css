@@ -1,36 +1,23 @@
-
-.create-container {
-  height: 100px;
-  position: relative;
+.button:hover {
+  transform: scale(1.2);
 }
 
 .data {
-  float:left;
-  margin: 0;
-  position: relative;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+  margin-top: 20px;
+  width: 100%;
 }
 
 .avatar {
-  overflow: hidden;
-  margin: 0;
-  position: relative;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  height: 100px;
+  display: table;
+  margin: 0 auto;
+}
+
+.avatar img {
+  height: 150px;
 }
 
 .avatar img:hover{
   transform: scale(1.1);
-}
-
-.avatar img {
-  height: 80%;
-  margin: 10px;
-  overflow: hidden;
 }
 
 .grid-container {
@@ -45,20 +32,85 @@
   margin: 0 auto;
 }
 
+.player-row {
+  width: fit-content;
+  height: fit-content;
+  
+  margin: 0 auto;  
+}
+
 .player-item {
-  height: 50px;
-  margin-top: 5px;
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  margin: 10px 20px 10px 20px;
+}
+
+.player-item:hover {
+  transform: scale(1.2);
 }
 
 .mini-avatar {
-  float: left;
-  height: 50px;
-  margin-right: 10px;
+  height: 70px;
 }
 
-.name {
+.hbox {
+  display: table;
+  margin: 15px auto;
   position: relative;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+}
+
+.name-field{
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+   border-radius: 20px;
+   border: 2px solid #694eb5;
+   color: #040521;
+   width: 200px;
+   height: 40px;
+   font-size: 20px;
+
+   float: left;
+  }
+  
+.name-field:focus {
+   outline: none;
+   border: 2px solid #b02078;
+   color: #040521;
+}
+
+.gender-button-box{
+  width: 50px;
+  float:left;
+  margin-left: 15px;
+}
+
+.gender-button{
+  height: 45px;
+}
+
+.check-button {
+  height: 45px;
+  margin-left: 15x;
+}
+
+.play-button {
+  width: 80px;
+  display: table;
+  margin: 30px auto 0 0;
+  float: left;
+  position: relative;
+  z-index: 0;
+}
+
+.play-button:hover {
+  z-index: 2;
+}
+
+.settings-button {
+  z-index: 1;
+  width: 40px;
+  position: absolute;
+  right: -15px;
+  bottom: -15px;
 }

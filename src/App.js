@@ -1,14 +1,13 @@
 import './App.css';
-import {CreatePlayers} from './CreatePlayers.js';
+import {CreatePlayers, CardSettings} from './CreatePlayers.js';
 import {Game} from './Game.js';
 import React from 'react';
 import {getCardCounts} from './Cards.js';
 
-import background from './Images/Background.jpg';
-
 
 
 class App extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -30,12 +29,16 @@ class App extends React.Component {
 
     this.state = {
       createPlayers: true,
+      settingScreen: false,
       settings: settings,
       cardCounts: counts
     }
 
+
+
     this.startGame = this.startGame.bind(this);
     this.changeSetting = this.changeSetting.bind(this);
+    this.gotoSettings = this.gotoSettings.bind(this);
   }
 
   changeSetting(key, value) { 
@@ -47,6 +50,11 @@ class App extends React.Component {
 
   startGame(players) {
     this.setState({players: players, settings: this.state.settings,createPlayers: false});
+    this.game = <Game class="bg" players={players} settings={this.state.settings} gotoSettings={this.gotoSettings}></Game>;
+  }
+
+  gotoSettings(yes) {
+    this.setState({settingScreen: yes});
   }
 
   render() {
@@ -56,10 +64,16 @@ class App extends React.Component {
       );
     }
 
+    if (this.state.settingScreen) {
+      return (
+        <div>
+          <CardSettings settings={this.state.settings} changeSetting={this.changeSetting} cardCounts={this.state.cardCounts}/>
+          <button onClick={() => this.gotoSettings(false)}> Save</button>
+        </div>
+      )
+    }
     return (
-      <div class="bg" style={{backgroundImage: `url(${background})`}}>
-        <Game players={this.state.players} settings={this.state.settings}></Game>
-      </div>
+      this.game
     )
   }
 }

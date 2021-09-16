@@ -1,5 +1,10 @@
 import React from 'react';
 import './CreatePlayers.css';
+import male from './Images/male.png';
+import female from './Images/female.png';
+import check from './Images/check.png';
+import play from './Images/play.png';
+import gear from './Images/gear.png';
 
 
 function importAll(r) {
@@ -21,7 +26,8 @@ class CreatePlayers extends React.Component {
       male: true,
       name: '',
       avatar: 'Dummie.png',
-      avatarPicker: false
+      avatarPicker: false,
+      genderImage: male
     }    
 
     this.handleChange = this.handleChange.bind(this);
@@ -31,6 +37,8 @@ class CreatePlayers extends React.Component {
     this.pickAvatar = this.pickAvatar.bind(this);
     this.availableAvatars = this.availableAvatars.bind(this);
     this.editPlayer = this.editPlayer.bind(this);
+    this.getPlayerTable = this.getPlayerTable.bind(this);
+    this.changeGender = this.changeGender.bind(this);
 
 
     // DEBUG =======
@@ -41,6 +49,9 @@ class CreatePlayers extends React.Component {
         {name: 'Laura', male: false, avatar: 'Avatar03.png'},
         {name: 'Ward', male: true, avatar: 'Avatar05.png'},
         {name: 'Cato', male: false, avatar: 'Avatar04.png'},
+        {name: 'Dries', male: true, avatar: 'Avatar06.png'},
+        {name: 'Jordy', male: true, avatar: 'Avatar08.png'},
+        {name: 'Alice', male: false, avatar: 'Avatar07.png'},
       ];
       //this.play();
     }
@@ -73,7 +84,7 @@ class CreatePlayers extends React.Component {
     }
 
     const newPlayers = this.state.players.concat({name: this.state.name, male: this.state.male, avatar: this.state.avatar});
-    this.setState({players: newPlayers, name: '', male: true, avatar: "Dummie.png"});
+    this.setState({players: newPlayers, name: '', male: true, avatar: "Dummie.png", genderImage: male});
   }
 
   play() {
@@ -115,7 +126,40 @@ class CreatePlayers extends React.Component {
     this.setState({players: players, name: editPlayer.name, male: editPlayer.male, avatar: editPlayer.avatar});
   }  
 
+  changeGender(isMale) {
+    if (isMale) {
+      this.setState({male: true, genderImage: male});
+    } else {
+      this.setState({male: false, genderImage: female});
+    }
+  }
+
+  getPlayerTable() {
+    var players = [];
+    var row = [];
+    for (var i in this.state.players) {
+      row.push(this.state.players[i]);
+      if (i % 5 === 4) {
+        players.push(row);
+        row = [];
+      }
+    }
+    if (row.length !== 0) {
+      players.push(row);
+    }
+
+    return ( 
+      <div>
+        {players.map((row) => 
+          <div className="player-row" key={JSON.stringify(row[0])}>
+            {row.map((player) => <PlayerItem key={player.name} player={player} onClick={(player) => this.editPlayer(player)}/>)}
+          </div>)}
+      </div>
+    )
+  }
+
   render() {
+    this.getPlayerTable();
     if (this.state.avatarPicker) {
       return (
         <div>
@@ -126,27 +170,22 @@ class CreatePlayers extends React.Component {
 
     return (
       <div style={{margin: '10px'}}>
-          {this.state.players.map((player) => <PlayerItem key={player.name} player={player} onClick={(player) => this.editPlayer(player)}/>)}
-        <div className='create-container'>
+        {this.getPlayerTable()}
           <div className='data'>
-
-            <label>{'Naam: '}
-              <input type='text' placeholder='Naam' value={this.state.name} onChange={this.handleChange}/>
-            </label>
-
-            <button id="gender" style={{width: '50px'}} onClick={() => this.setState({male: !this.state.male})}>
-              {this.state.male ? 'Man' : 'Vrouw'}
-            </button>
-
-            <button onClick={() => this.addPlayer()}>
-              Voeg toe
-            </button>
-          </div>
-          <div className='avatar'><img src={images[this.state.avatar].default} onClick={() => this.choseAvatar()} alt='Avatar'/></div>          
-        </div>
-        <CardSettings settings={this.props.settings} changeSetting={this.props.changeSetting} cardCounts={this.props.cardCounts}/>      
-        <div>
-          <button onClick={() => this.play()}> Start</button>
+            <div className='avatar'>
+              <img src={images[this.state.avatar].default} onClick={() => this.choseAvatar()} alt='Avatar'/>
+            </div> 
+            <div className='hbox'>
+              <input className="name-field" type='text' placeholder='Naam' value={this.state.name} onChange={this.handleChange}/>
+              <div className="gender-button-box">
+                <img className="gender-button button" src={this.state.genderImage} alt={this.state.male ? "Male" : "Female"} onClick={() => this.changeGender(!this.state.male)}/>
+              </div>
+              <img className="check-button button" src={check} alt="Add player" onClick={() => this.addPlayer()}/>  
+            </div> 
+            <div className="hbox"> 
+              <img className="play-button button" src={play} alt="Play" onClick={() => this.play()}/>
+              <img className="settings-button button" src={gear} alt="Settings" onClick={() => console.log("hi")}/>
+            </div>
         </div>
       </div>
     )
@@ -211,4 +250,4 @@ class CardSettings extends React.Component {
 
 }
 
-export {CreatePlayers}
+export {CreatePlayers, CardSettings}

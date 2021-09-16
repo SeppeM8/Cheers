@@ -33,6 +33,8 @@ class Game extends React.Component{
 
     this.getSlokken = this.getSlokken.bind(this);
     this.nextCard = this.nextCard.bind(this);
+
+    this.nextCard();
   }
 
   getSlokken() {
@@ -103,9 +105,6 @@ class Game extends React.Component{
     var type = Math.floor(Math.random() * this.props.settings.total);
     var total = this.props.settings.solo;
 
-    console.log("settings: " + JSON.stringify(this.props.settings));
-    console.log("type: " + type);
-
     if (type < total) {
       const players = this.nextPlayers(1);
       const card = this.soloFac.getCard(this.getSlokken(), players[0].name, players[0].male);
@@ -140,13 +139,12 @@ class Game extends React.Component{
     this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});
   };
 
-
   render() {
     return (
       <div className='game'>
         <Playerbar players={this.props.players} currentPlayers={this.state.currentPlayers}></Playerbar>
         <div className='cards-field'>
-          <div className='current-card'>
+          <div className='current-card' onClick={() => this.nextCard()}>
             {this.state.currentCard}
           </div>
           <div className='staying-cards'>
@@ -155,6 +153,7 @@ class Game extends React.Component{
         </div>
         <div className='button-box'>
           <button type="button" autoFocus onClick={() => this.nextCard()} >Next</button>
+          <button type="button" onClick={() => this.props.gotoSettings(true)}> Settings</button>
         </div>
       </div>
     );
