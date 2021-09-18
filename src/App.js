@@ -35,6 +35,11 @@ class App extends React.Component {
   }  
 
   resetSettings(init) {
+    if (init) {
+      var drinking = 50;
+    } else {
+      var drinking = this.state.settings.drinking;
+    }
     const counts = getCardCounts();
     var max = 0;
     var key;
@@ -43,7 +48,7 @@ class App extends React.Component {
         max = counts[key];
       }
     }
-    var settings = {};
+    var settings = {drinking: drinking};
     var total = 0;
     for (key in counts) {
       settings[key] = counts[key]/max*100;
@@ -61,7 +66,6 @@ class App extends React.Component {
 
   startGame(players) {
     this.setState({players: players, settings: this.state.settings,createPlayers: false});
-    this.game = <Game class="bg" players={players} settings={this.state.settings} gotoSettings={this.gotoSettings}></Game>;
   }
 
   gotoSettings(yes) {
@@ -69,11 +73,6 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.createPlayers) {
-      return (
-        <CreatePlayers startGame={(players) => this.startGame(players)} changeSetting={this.changeSetting} settings={this.state.settings} cardCounts={this.state.cardCounts}></CreatePlayers>
-      );
-    }
 
     if (this.state.settingScreen) {
       return (
@@ -88,8 +87,28 @@ class App extends React.Component {
         </div>
       )
     }
+    
+    if (this.state.createPlayers) {
+      return (
+        <CreatePlayers
+          startGame={(players) => this.startGame(players)}
+          changeSetting={this.changeSetting}
+          settings={this.state.settings}
+          cardCounts={this.state.cardCounts}
+          gotoSettings={this.gotoSettings}
+        />
+      );
+    }
+
     return (
-      this.game
+      <Game 
+        players={this.state.players}
+        settings={this.state.settings}
+        gotoSettings={this.gotoSettings}
+        changeSetting={this.changeSetting}
+        cardCounts={this.state.cardCounts}
+        resetSettings={this.resetSettings}
+      />
     )
   }
 }

@@ -1,9 +1,7 @@
 
 .title {
-  font-size: 70px;
+  font-size: 50px;
   font-family: 'Trebuchet MS';
-  width: 100%;
-  text-align: center;
   margin-bottom: 20px;
 }
 
@@ -47,19 +45,56 @@
 .slider::-moz-range-thumb {
   width: 20px;
   height: 20px;
-  background: #03fcf0;
+  background: white;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .reset-button {
-  height: 50px;  
+  height: 55px;  
   float: left;
 }
 
 .save-button {
-  height: 65px;
-  margin-left: 70px;  
+  height: 55px;
+  margin-left: 20px;  
 }
 
+.settings-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 
+  width: 550px;
+  border-radius: 50px;
+  background: linear-gradient(45deg, rgba(4,5,33,1) 0%, rgba(58,7,110,1) 100% );
+  border: 5px solid white;
+}
+
+.row {
+  display: flex;
+}
+
+/* Create two equal columns that sits next to each other */
+.right-column {
+  flex: 50%;
+  padding-left: 25px;
+}
+
+.left-column {
+  flex: 50%;
+  padding-right: 25px;
+}
+
+.button-box {
+  height: fit-content;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.drinking-slider {
+  width: 455px;
+}

@@ -53,7 +53,7 @@ class CreatePlayers extends React.Component {
         {name: 'Jordy', male: true, avatar: 'Avatar08.png'},
         {name: 'Alice', male: false, avatar: 'Avatar07.png'},
       ];
-      this.play();
+      //this.play();
     }
     // =============
   }
@@ -169,23 +169,23 @@ class CreatePlayers extends React.Component {
     }
 
     return (
-      <div style={{margin: '10px'}}>
+      <div style={{margin: '10px'}}> 
         {this.getPlayerTable()}
-          <div className='data'>
-            <div className='avatar'>
-              <img src={images[this.state.avatar].default} onClick={() => this.choseAvatar()} alt='Avatar'/>
-            </div> 
-            <div className='hbox'>
-              <input className="name-field" type='text' placeholder='Naam' value={this.state.name} onChange={this.handleChange}/>
-              <div className="gender-button-box">
-                <img className="gender-button button" src={this.state.genderImage} alt={this.state.male ? "Male" : "Female"} onClick={() => this.changeGender(!this.state.male)}/>
-              </div>
-              <img className="check-button button" src={check} alt="Add player" onClick={() => this.addPlayer()}/>  
-            </div> 
-            <div className="hbox"> 
-              <img className="play-button button" src={play} alt="Play" onClick={() => this.play()}/>
-              <img className="settings-button button" src={gear} alt="Settings" onClick={() => this.props.gotoSettings(true)}/>
+        <div className='data'>
+          <div className='avatar'>
+            <img src={images[this.state.avatar].default} onClick={() => this.choseAvatar()} alt='Avatar'/>
+          </div> 
+          <div className='hbox'>
+            <input className="name-field" type='text' placeholder='Name' value={this.state.name} onChange={this.handleChange}/>
+            <div className="gender-button-box">
+              <img className="gender-button button" src={this.state.genderImage} alt={this.state.male ? "Male" : "Female"} onClick={() => this.changeGender(!this.state.male)}/>
             </div>
+            <img className="check-button button" src={check} alt="Add player" onClick={() => this.addPlayer()}/>  
+          </div> 
+          <div className="hbox"> 
+            <img className="play-button button" src={play} alt="Play" onClick={() => this.play()}/>
+            <img className="settings-button button" src={gear} alt="Settings" onClick={() => this.props.gotoSettings(true)}/>
+          </div>
         </div>
       </div>
     )
@@ -197,7 +197,7 @@ class PlayerItem extends React.Component {
     return (
       <div className='player-item' onClick={() => this.props.onClick(this.props.player)}>
         <img className='mini-avatar' key={this.props.player.avatar} src={images[this.props.player.avatar].default} alt={this.props.player.avatar}/>
-        <div className='name'>{this.props.player.name} {this.props.player.male ? "(M)" : "(V)"}</div>
+        <div className='name'>{this.props.player.name} {this.props.player.male ? "(M)" : "(F)"}</div>
       </div>
     )
   }

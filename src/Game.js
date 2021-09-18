@@ -1,6 +1,7 @@
 import React from 'react';
 import './Game.css';
-import {DuoFactory, GroupFactory, NhieFactory, SoloFactory, StayingSoloFactory, MiniCard} from './Cards.js';
+import {DuoFactory, GroupFactory, NhieFactory, SoloFactory, StayingSoloFactory, StayingDuoFactory, StayingGroupFactory} from './Cards.js';
+import { SettingsScreen } from './Settings';
 
 
 function importAll(r) {
@@ -22,19 +23,25 @@ class Game extends React.Component{
     this.groupFac = new GroupFactory();
     this.nhieFac = new NhieFactory();
     this.stayingSoloFac = new StayingSoloFactory(this.props.players.length);
+    this.stayingDuoFac = new StayingDuoFactory(this.props.players.length);
+    this.stayingGroupFac = new StayingGroupFactory(this.props.players.length);
 
     this.players = [];
     for (var player of this.props.players){
       this.players.push({count: 1, player: player});
     }
 
-    this.state = {currentPlayers: [], stayingCards: []};
+    this.state = {
+      currentPlayers: [], 
+      stayingCards: [],
+      settings: false
+    };
 
 
     this.getSlokken = this.getSlokken.bind(this);
     this.nextCard = this.nextCard.bind(this);
+    this.settings = this.settings.bind(this);
 
-    this.nextCard();
   }
 
   getSlokken() {
@@ -132,28 +139,69 @@ class Game extends React.Component{
       this.setState({currentCard: card, currentPlayers: players});      
       return;
     }
-    const players = this.nextPlayers(1);
-    const cards = this.stayingSoloFac.getCard(this.getSlokken(), players[0].name, players[0].male);
+    total += this.props.settings.stayingSolo;
+    if (type < total) {
+      const players = this.nextPlayers(1);
+      const cards = this.stayingSoloFac.getCard(this.getSlokken(), players[0].name, players[0].male);
+      var stayingCards = this.state.stayingCards;
+      stayingCards.push(cards[1]);
+      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});
+    }
+    total += this.props.settings.stayingDuo;
+    if (type < total) {
+      const players = this.nextPlayers(2);
+      const cards = this.stayingDuoFac.getCard(this.getSlokken(), players[0].name, players[1].name, players[0].male, players[1].male);
+      var stayingCards = this.state.stayingCards;
+      stayingCards.push(cards[1]);
+      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});
+    }    
+    
+    const players = this.players.slice().map(x => x.player);
+    const cards = this.stayingGroupFac.getCard(this.getSlokken());
     var stayingCards = this.state.stayingCards;
     stayingCards.push(cards[1]);
     this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});
+    
   };
+
+  settings(yes) {
+    this.setState({settings: yes});
+  }
+
+  renderSettings() {    
+    if (this.state.settings) {
+      return (
+        <div className="settings-background">
+          <div className="settings-box">
+            <SettingsScreen
+              settings={this.props.settings}
+              changeSetting={this.props.changeSetting}
+              cardCounts={this.props.cardCounts}
+              resetSettings={this.props.resetSettings}
+              gotoSettings={() =>this.settings(false)}
+            />
+          </div>
+        </div>
+      )
+    }
+  }
 
   render() {
     return (
       <div className='game'>
+        {this.renderSettings()}
         <Playerbar players={this.props.players} currentPlayers={this.state.currentPlayers}></Playerbar>
         <div className='cards-field'>
           <div className='current-card' onClick={() => this.nextCard()}>
             {this.state.currentCard}
           </div>
           <div className='staying-cards'>
-            {this.state.stayingCards.map(card => (<MiniCard text={card.text}/>))}
+            {this.state.stayingCards.map(card => (card.card))}
           </div>
         </div>
         <div className='button-box'>
           <button type="button" autoFocus onClick={() => this.nextCard()} >Next</button>
-          <button type="button" onClick={() => this.props.gotoSettings(true)}> Settings</button>
+          <button type="button" onClick={() => this.settings(true)}> Settings</button>
         </div>
       </div>
     );

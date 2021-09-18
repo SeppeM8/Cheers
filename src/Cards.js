@@ -17,6 +17,13 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
 }
 
+var miniId = 0;
+
+function getMiniID() {
+  miniId++;
+  return miniId;
+}
+
 //# 0 = slokken, 1 = persoon, 2 = man
 const soloCards = [
 '{1}, draai je weg van de groep. Een andere speler tikt op je rug. Als je raadt wie het was moet de groep {0} drinken, anders moet je zelf drinken',
@@ -157,15 +164,37 @@ const nhieCards = [
 
 // # min;max;opdracht;samenvatting met: 0 = slokken, 1 = persoon, 2 = man
 const stayingSoloCards = [
-  '1;20;Spreek geen Nederlands {1}, Als je betrapt wordt: drink {0};Als {1} Nederlands praat: {0}',
-  '10;1;Leugenaar! Als iemand {1} betrapt op de waarheid, drinkt {2, choice, 0#hij|1#zij} {0}; Als {1} de waarheid zegt: {0}',
+  '1;2;Spreek geen Nederlands {1}, Als je betrapt wordt: drink {0};Als {1} Nederlands praat: {0}',
+  '1;2;Leugenaar! Als iemand {1} betrapt op de waarheid, drinkt {2, choice, 0#hij|1#zij} {0}; Als {1} de waarheid zegt: {0}',
   '3;5;Elke keer {1} {2, choice, 0#zijn|1#haar} glas wilt bijvullen, moet {2, choice, 0#hij|1#zij} bewijzen dat {2, choice, 0#zijn|1#haar} glas leeg is door het omgekeerd boven {2, choice, 0#zijn|1#haar} hoofd te houden. Indien vergeten: adje; Als {1} {2, choice, 0#zijn|1#haar} glas leeg is: Boven hoofd, anders adje',
-  '2;4;{1} is duimkoning. Als hij zijn duim op tafel legt moet iedereen volgen. Wie laatst is drinkt {0};{1} de duimkoning',
-  '1;2;{1} wordt vanaf nu aangesproken met {2, choice, 0#meneer|1#mevrouw} de geweldige superieure toffe mens, de eerste die dit niet doet moet op zijn knieën om vergiffenis vragen; Spreek {1} aan met {2, choice, 0#meneer|1#mevrouw} de geweldige superieure toffe mens, anders om vergiffenis vragen'
+  '2;4;{1} is duim{2, choice, 0#koning|1#koningin}. Als hij zijn duim op tafel legt moet iedereen volgen. Wie laatst is drinkt {0};{1} de duim{2, choice, 0#koning|1#duimkoningin}',
+  '1;2;{1} wordt vanaf nu aangesproken met {2, choice, 0#meneer|1#mevrouw} de geweldige superieure toffe mens, de eerste die dit niet doet moet op zijn knieën om vergiffenis vragen; Spreek {1} aan met {2, choice, 0#meneer|1#mevrouw} de geweldige superieure toffe mens, anders om vergiffenis vragen',
+  '1;2;Als {1} "euhm" zegt, moet {2, choice, 0#hij|1#zij} {0} drinken;Als {1} "euhm" zegt: {0}'
 ];
 
+// # min;max;opdracht;samenvatting met: 0 = slokken, 1 = player1, 2 = player2, 3 = man1, 4 = man2
+const stayingDuoCards = [
+  '3;7;{1} en {2} zijn drinkpartners;{1} en {2} zijn drinkpartners',
+  '1;2;{1} en {2} moeten elkaars handen vasthouden;{1} en {2} moeten handen vasthouden'
+];
+
+// # min;max;opdracht;samenvatting met: 0 = slokken
+const stayingGroupCards = [
+  '1;5;Wie betrapt wordt met zijn telefoon in de hand drinkt {0};GSM = {0}',
+  '1;1;Alle slokken zijn dubbel;Dubbele slokken'
+]
+
+
 function getCardCounts() {
-  return {solo: soloCards.length, duo: duoCards.length, group: groupCards.length, nhie: nhieCards.length, stayingSolo: stayingSoloCards.length};
+  return {
+    solo: soloCards.length,
+    duo: duoCards.length,
+    group: groupCards.length,
+    nhie: nhieCards.length,
+    stayingSolo: stayingSoloCards.length,
+    stayingDuo: stayingDuoCards.length,
+    stayingGroup: stayingGroupCards.length
+  };
 }
 
 
@@ -322,9 +351,6 @@ class NhieCard extends React.Component {
   }
 }
 
-// # min;max;opdracht;samenvatting met: 0 = slokken, 1 = persoon, 2 = man
-
-
 class StayingSoloFactory {
   constructor(playerCount) {
     this.playerCount = playerCount;
@@ -348,8 +374,6 @@ class StayingSoloFactory {
 
     text = text.match(/^[^;]+;[^;]+;(.*);.*$/)[1];
 
-    this.index = (this.index+1)%this.cards.length;
-
     text = text.replaceAll('{0}', slokken).replaceAll('{1}', name)
     if (male) {
       text = text.replaceAll(/{2, choice, 0#(\w+)\|[^}]*\}/g, '$1');
@@ -366,7 +390,7 @@ class StayingSoloFactory {
       samenvatting = samenvatting.replaceAll(/{2, choice, 0#[^|]*\|1#(\w+)\}/g, '$1');
     }
     
-    return [<StayingSoloCard text={text} />, {text:samenvatting, turns:getRandomInt(min, max)}];
+    return [<StayingSoloCard text={text} />, {card:<MiniSoloCard text={samenvatting} key={getMiniID()}/>, turns:getRandomInt(min, max)}];
   }
 
   cardCount() {
@@ -384,14 +408,148 @@ class StayingSoloCard extends React.Component {
   }
 }
 
-class MiniCard extends React.Component {
+class MiniSoloCard extends React.Component {
   render() {
     return (
-      <div className="card-mini">
+      <div className="mini-solo-card mini-card">
           <span>{this.props.text}</span>
       </div>
     );
   }
 }
 
-export {getCardCounts, SoloFactory, DuoFactory, GroupFactory, NhieFactory, StayingSoloFactory, MiniCard};
+// # min;max;opdracht;samenvatting met: 0 = slokken, 1 = player1, 2 = player2, 3 = man1, 4 = man2
+
+class StayingDuoFactory {
+  constructor(playerCount) {
+    this.playerCount = playerCount;
+    this.cards = stayingDuoCards.slice();
+    shuffleArray(this.cards);
+  }
+
+  getCard(slokken, name1, name2, male1, male2) {
+
+    if (this.cards.length === 0) {
+      this.cards = stayingDuoCards.slice();
+      shuffleArray(this.cards);
+    }
+
+    var text = this.cards.pop();
+
+    const min = this.playerCount * text.match(/(^[^;]+)/)[0];
+    const max = this.playerCount * text.match(/^[^;]+;([^;]+);/)[1];
+    var samenvatting = text.match(/^[^;]+;[^;]+;[^;]+;(.*)$/)[1]
+    text = text.match(/^[^;]+;[^;]+;(.*);.*$/)[1];
+
+    text = text.replaceAll('{0}', slokken).replaceAll('{1}', name1).replaceAll('{2}', name2);
+    if (male1) {
+      text = text.replaceAll(/{3, choice, 0#(\w+)\|[^}]*\}/g, '$1');
+    }
+    else {
+      text = text.replaceAll(/{3, choice, 0#[^|]*\|1#(\w+)\}/g, '$1');
+    }
+    if (male2) {
+      text = text.replaceAll(/{4, choice, 0#(\w+)\|[^}]*\}/g, '$1');
+    }
+    else {
+      text = text.replaceAll(/{4, choice, 0#[^|]*\|1#(\w+)\}/g, '$1');
+    }
+
+    samenvatting = samenvatting.replaceAll('{0}', slokken).replaceAll('{1}', name1).replaceAll('{2}', name2)
+    if (male1) {
+      samenvatting = samenvatting.replaceAll(/{3, choice, 0#(\w+)\|[^}]*\}/g, '$1');
+    }
+    else {
+      samenvatting = samenvatting.replaceAll(/{3, choice, 0#[^|]*\|1#(\w+)\}/g, '$1');
+    }
+    if (male2) {
+      samenvatting = samenvatting.replaceAll(/{4, choice, 0#(\w+)\|[^}]*\}/g, '$1');
+    }
+    else {
+      samenvatting = samenvatting.replaceAll(/{4, choice, 0#[^|]*\|1#(\w+)\}/g, '$1');
+    }
+    
+    return [<StayingDuoCard text={text} />, {card:<MiniDuoCard text={samenvatting} key={getMiniID()}/>, turns:getRandomInt(min, max)}];
+  }
+
+  cardCount() {
+    return this.cards.length;
+  }
+};
+
+class StayingDuoCard extends React.Component {
+  render() {
+    return (
+      <div className="staying-duo-card card">
+          <span>{this.props.text}</span>
+      </div>
+    );
+  }
+}
+
+class MiniDuoCard extends React.Component {
+  render() {
+    return (
+      <div className="mini-duo-card mini-card">
+          <span>{this.props.text}</span>
+      </div>
+    );
+  }
+}
+
+
+// # min;max;opdracht;samenvatting met: 0 = slokken
+
+class StayingGroupFactory {
+  constructor(playerCount) {
+    this.playerCount = playerCount;
+    this.cards = stayingGroupCards.slice();
+    shuffleArray(this.cards);
+  }
+
+  getCard(slokken, name1, name2, male1, male2) {
+
+    if (this.cards.length === 0) {
+      this.cards = stayingGroupCards.slice();
+      shuffleArray(this.cards);
+    }
+
+    var text = this.cards.pop();
+
+    const min = this.playerCount * text.match(/(^[^;]+)/)[0];
+    const max = this.playerCount * text.match(/^[^;]+;([^;]+);/)[1];
+    var samenvatting = text.match(/^[^;]+;[^;]+;[^;]+;(.*)$/)[1]
+    text = text.match(/^[^;]+;[^;]+;(.*);.*$/)[1];
+
+    text = text.replaceAll('{0}', slokken);
+    samenvatting = samenvatting.replaceAll('{0}', slokken);
+    
+    return [<StayingGroupCard text={text} />, {card:<MiniGroupCard text={samenvatting} key={getMiniID()}/>, turns:getRandomInt(min, max)}];
+  }
+
+  cardCount() {
+    return this.cards.length;
+  }
+};
+
+class StayingGroupCard extends React.Component {
+  render() {
+    return (
+      <div className="staying-group-card card">
+          <span>{this.props.text}</span>
+      </div>
+    );
+  }
+}
+
+class MiniGroupCard extends React.Component {
+  render() {
+    return (
+      <div className="mini-group-card mini-card">
+          <span>{this.props.text}</span>
+      </div>
+    );
+  }
+}
+
+export {getCardCounts, SoloFactory, DuoFactory, GroupFactory, NhieFactory, StayingSoloFactory, StayingDuoFactory, StayingGroupFactory};
