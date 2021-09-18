@@ -35,10 +35,11 @@ class App extends React.Component {
   }  
 
   resetSettings(init) {
+    var drinking;
     if (init) {
-      var drinking = 50;
+      drinking = 50;
     } else {
-      var drinking = this.state.settings.drinking;
+      drinking = this.state.settings.drinking;
     }
     const counts = getCardCounts();
     var max = 0;

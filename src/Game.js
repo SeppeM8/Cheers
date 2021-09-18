@@ -2,6 +2,8 @@ import React from 'react';
 import './Game.css';
 import {DuoFactory, GroupFactory, NhieFactory, SoloFactory, StayingSoloFactory, StayingDuoFactory, StayingGroupFactory} from './Cards.js';
 import { SettingsScreen } from './Settings';
+import next from './Images/next.png';
+import gear from './Images/gear.png';
 
 
 function importAll(r) {
@@ -140,28 +142,30 @@ class Game extends React.Component{
       return;
     }
     total += this.props.settings.stayingSolo;
+    var stayingCards;
     if (type < total) {
       const players = this.nextPlayers(1);
       const cards = this.stayingSoloFac.getCard(this.getSlokken(), players[0].name, players[0].male);
-      var stayingCards = this.state.stayingCards;
+      stayingCards = this.state.stayingCards;
       stayingCards.push(cards[1]);
-      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});
+      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});      
+      return;
     }
     total += this.props.settings.stayingDuo;
     if (type < total) {
       const players = this.nextPlayers(2);
       const cards = this.stayingDuoFac.getCard(this.getSlokken(), players[0].name, players[1].name, players[0].male, players[1].male);
-      var stayingCards = this.state.stayingCards;
+      stayingCards = this.state.stayingCards;
       stayingCards.push(cards[1]);
-      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});
+      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});      
+      return;
     }    
     
     const players = this.players.slice().map(x => x.player);
     const cards = this.stayingGroupFac.getCard(this.getSlokken());
-    var stayingCards = this.state.stayingCards;
+    stayingCards = this.state.stayingCards;
     stayingCards.push(cards[1]);
-    this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});
-    
+    this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});    
   };
 
   settings(yes) {
@@ -197,11 +201,11 @@ class Game extends React.Component{
           </div>
           <div className='staying-cards'>
             {this.state.stayingCards.map(card => (card.card))}
+          </div>          
+          <div className="game-buttons-box">
+            <img className="next-button button" src={next} alt="Next" onClick={() => this.nextCard()}/>
+            <img className="game-settings-button button" src={gear} alt="Settings" onClick={() => this.settings(true)}/>
           </div>
-        </div>
-        <div className='button-box'>
-          <button type="button" autoFocus onClick={() => this.nextCard()} >Next</button>
-          <button type="button" onClick={() => this.settings(true)}> Settings</button>
         </div>
       </div>
     );

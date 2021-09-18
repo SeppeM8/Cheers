@@ -20,7 +20,7 @@
   -webkit-appearance: none;
   width: 200px;
   height: 20px;
-  background: linear-gradient(90deg, rgba(105,78,181,1) 0%, rgba(176,32,120,1) 100% );
+  background: linear-gradient(90deg, rgba(176,32,120,1) 0%, rgba(105,78,181,1) 100% );
   border: 2px solid white;
   border-radius: 20px;
   opacity: 0.8;

@@ -1,7 +1,7 @@
 
 .playerbar {
   width: 100%;
-  height: 30vmin;
+  height: 25vmin;
   text-align: center;
 }
 
@@ -36,10 +36,6 @@
   color: rgb(155, 155, 155);
 }
 
-.button-box {
-  height: 10vh;
-}
-
 .cards-field {
   width: 100%;
   overflow: hidden;
@@ -48,13 +44,14 @@
 .current-card {
   width: 78%;
   float: left;
-  height: 60vh;
+  height: 68vh;
 }
 
 .staying-cards {
   width: 19%;
   float: right;
-  overflow: hidden;
+  overflow: auto;
+  height: 58vh;
 }
 
 .game {
@@ -73,4 +70,32 @@
   height: 100%;
 
   background: rgba(0, 0, 0, 0.3);
+}
+
+.game-buttons-box {
+  float: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 130px;
+  height: 110px;
+}
+
+.next-button {
+  height: 80px;
+  float: left;
+  position: relative;
+  z-index: 0;
+}
+
+.next-button:hover {
+  z-index: 2;
+}
+
+.game-settings-button {
+  z-index: 1;
+  height: 40px;
+  position: relative;
+  top: 50px;
+  right: 15px;
 }
