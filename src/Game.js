@@ -1,7 +1,6 @@
 import React from 'react';
 import './Game.css';
 import {DuoFactory, GroupFactory, NhieFactory, SoloFactory, StayingSoloFactory, StayingDuoFactory, StayingGroupFactory} from './Cards.js';
-import { SettingsScreen } from './Settings';
 import next from './Images/next.png';
 import gear from './Images/gear.png';
 
@@ -42,8 +41,6 @@ class Game extends React.Component{
 
     this.getSlokken = this.getSlokken.bind(this);
     this.nextCard = this.nextCard.bind(this);
-    this.settings = this.settings.bind(this);
-
   }
 
   getSlokken() {
@@ -168,32 +165,9 @@ class Game extends React.Component{
     this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});    
   };
 
-  settings(yes) {
-    this.setState({settings: yes});
-  }
-
-  renderSettings() {    
-    if (this.state.settings) {
-      return (
-        <div className="settings-background">
-          <div className="settings-box">
-            <SettingsScreen
-              settings={this.props.settings}
-              changeSetting={this.props.changeSetting}
-              cardCounts={this.props.cardCounts}
-              resetSettings={this.props.resetSettings}
-              gotoSettings={() =>this.settings(false)}
-            />
-          </div>
-        </div>
-      )
-    }
-  }
-
   render() {
     return (
       <div className='game'>
-        {this.renderSettings()}
         <Playerbar players={this.props.players} currentPlayers={this.state.currentPlayers}></Playerbar>
         <div className='cards-field'>
           <div className='current-card' onClick={() => this.nextCard()}>
@@ -204,7 +178,7 @@ class Game extends React.Component{
           </div>          
           <div className="game-buttons-box">
             <img className="next-button button" src={next} alt="Next" onClick={() => this.nextCard()}/>
-            <img className="game-settings-button button" src={gear} alt="Settings" onClick={() => this.settings(true)}/>
+            <img className="game-settings-button button" src={gear} alt="Settings" onClick={() => this.props.gotoSettings(true)}/>
           </div>
         </div>
       </div>

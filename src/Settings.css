@@ -98,3 +98,16 @@
 .drinking-slider {
   width: 455px;
 }
+
+.settings-background {
+  z-index: 100;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+
+  background: rgba(0, 0, 0, 0.3);
+}

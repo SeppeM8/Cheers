@@ -16,7 +16,7 @@ class App extends React.Component {
 
     this.state = {
       createPlayers: true,
-      settingScreen: false,
+      showSettings: false,
       settings: settings,
       cardCounts: getCardCounts()
     }
@@ -70,46 +70,46 @@ class App extends React.Component {
   }
 
   gotoSettings(yes) {
-    this.setState({settingScreen: yes});
+    this.setState({showSettings: yes});
+  }
+  
+  renderSettings() {    
+    if (this.state.showSettings) {
+      return (
+        <SettingsScreen
+          settings={this.state.settings}
+          changeSetting={this.changeSetting}
+          cardCounts={this.state.cardCounts}
+          resetSettings={this.resetSettings}
+          gotoSettings={this.gotoSettings}
+        />
+      )
+    }
   }
 
   render() {
-
-    if (this.state.settingScreen) {
-      return (
-        <div>
-          <SettingsScreen 
-            settings={this.state.settings}
-            changeSetting={this.changeSetting}
-            cardCounts={this.state.cardCounts}
-            resetSettings={this.resetSettings}
-            gotoSettings={this.gotoSettings}
-          />
-        </div>
-      )
-    }
     
     if (this.state.createPlayers) {
       return (
-        <CreatePlayers
-          startGame={(players) => this.startGame(players)}
-          changeSetting={this.changeSetting}
-          settings={this.state.settings}
-          cardCounts={this.state.cardCounts}
-          gotoSettings={this.gotoSettings}
-        />
+        <div>
+          {this.renderSettings()}
+          <CreatePlayers
+            startGame={(players) => this.startGame(players)}
+            gotoSettings={this.gotoSettings}
+          />
+        </div>
       );
     }
 
     return (
-      <Game 
-        players={this.state.players}
-        settings={this.state.settings}
-        gotoSettings={this.gotoSettings}
-        changeSetting={this.changeSetting}
-        cardCounts={this.state.cardCounts}
-        resetSettings={this.resetSettings}
-      />
+      <div>
+        {this.renderSettings()}
+        <Game 
+          players={this.state.players}
+          settings={this.state.settings}
+          gotoSettings={this.gotoSettings}
+        />
+      </div>
     )
   }
 }
