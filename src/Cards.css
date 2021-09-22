@@ -54,7 +54,8 @@
 
 .solo-card {
   line-height: 60vh;
-  background-color: darkgoldenrod;
+  background: rgb(218,120,8);
+  background: linear-gradient(165deg, rgba(218,120,8,1) 0%, rgba(129,69,0,1) 100%);
 }
 
 .solo-card span {
@@ -62,7 +63,8 @@
 }
 
 .duo-card {
-  background-color: red;
+  background: rgb(0,224,33);
+  background: linear-gradient(165deg, rgba(0,224,33,1) 0%, rgba(0,66,64,1) 100%);
   line-height: 60vh;
 }
 
@@ -71,7 +73,8 @@
 }
 
 .group-card {
-  background-color: blue;
+  background: rgb(0,195,210);
+  background: linear-gradient(165deg, rgba(0,195,210,1) 0%, rgba(0,64,130,1) 100%);
   line-height: 60vh;
 }
 
@@ -80,8 +83,8 @@
 }
 
 .nhie-card { 
-  background-color: black;
-  color: white;
+  background: rgb(0,0,0);
+  background: linear-gradient(165deg, rgb(3, 0, 99) 0%, rgba(0,0,0,1) 100%);
 }
 
 .nhie-title {
@@ -97,7 +100,8 @@
 
 .staying-solo-card {
   line-height: 60vh;
-  background-color: maroon;
+  background: rgb(221,123,11);
+  background: linear-gradient(165deg, rgb(204, 161, 8) 0%, rgb(221, 78, 11) 100%);
 }
 
 .staying-solo-card span {
@@ -105,12 +109,14 @@
 }
 
 .mini-solo-card {
-  background-color: maroon;
+  background: rgb(221,123,11);
+  background: linear-gradient(165deg, rgb(204, 161, 8) 0%, rgb(221, 78, 11) 100%);
 }
 
 .staying-duo-card {
   line-height: 60vh;
-  background-color: maroon;
+  background: rgb(0,224,146);
+  background: linear-gradient(165deg, rgba(0,224,146,1) 0%, rgba(0,43,66,1) 100%);
 }
 
 .staying-duo-card span {
@@ -118,16 +124,19 @@
 }
 
 .mini-duo-card {
-  background-color: maroon;
+  background: rgb(0,224,146);
+  background: linear-gradient(165deg, rgba(0,224,146,1) 0%, rgba(0,43,66,1) 100%);
 }
 
 .mini-group-card {
-  background-color: maroon;
+  background: rgb(0,197,224);
+  background: linear-gradient(165deg, rgba(0,197,224,1) 0%, rgba(0,16,66,1) 100%);
 }
 
 .staying-group-card {
   line-height: 60vh;
-  background-color: maroon;
+  background: rgb(0,197,224);
+  background: linear-gradient(165deg, rgba(0,197,224,1) 0%, rgba(0,16,66,1) 100%);
 }
 
 .staying-group-card span {

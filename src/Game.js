@@ -19,13 +19,15 @@ class Game extends React.Component{
   constructor(props) {
     super(props);
 
+    var self = this;
+
     this.soloFac = new SoloFactory();
     this.duoFac = new DuoFactory();
     this.groupFac = new GroupFactory();
     this.nhieFac = new NhieFactory();
-    this.stayingSoloFac = new StayingSoloFactory(this.props.players.length);
-    this.stayingDuoFac = new StayingDuoFactory(this.props.players.length);
-    this.stayingGroupFac = new StayingGroupFactory(this.props.players.length);
+    this.stayingSoloFac = new StayingSoloFactory(this.removeStaying, self);
+    this.stayingDuoFac = new StayingDuoFactory(this.removeStaying, self);
+    this.stayingGroupFac = new StayingGroupFactory(this.removeStaying, self);
 
     this.players = [];
     for (var player of this.props.players){
@@ -40,20 +42,57 @@ class Game extends React.Component{
 
 
     this.getSlokken = this.getSlokken.bind(this);
-    this.nextCard = this.nextCard.bind(this);
+    this.nextCard = this.nextCard.bind(this);    
+    this.removeStaying = this.removeStaying.bind(this);
+  }
+
+  removeStaying(self, id) {
+    var staying = []
+    for (var card of self.state.stayingCards) {
+      if (card.card.key !== ''+id) {
+        staying.push(card);
+      }
+    }
+    self.setState({stayingCards: staying});
+  }
+
+  testSlokken() {
+    console.log("-------------------------------------------------")
+    for (var sett = 0; sett <=100; sett +=5) {      
+      var counts = {'een slok':0, 'twee slokken':0, 'drie slokken':0, 'een shotje':0, 'een adje':0};
+      this.props.settings.drinking = sett;
+      for (var i = 0; i<10000; i++) {
+        const num = this.getSlokken();
+        counts[num] = counts[num] ? counts[num] + 1 : 1;
+      }
+      for (var key in counts) {
+        counts[key] = counts[key] / 100;
+      }
+      console.log(sett, counts);
+    }
   }
 
   getSlokken() {
-    const rand = Math.random();
-    if (rand < 0.25) {
-      return '1 slok';
-    } else if (rand < 0.5) {
-      return '2 slokken';
-    } else if (rand < 0.75) {
-      return '3 slokken';
-    } else {
-      return 'een adje';
+    var setting = this.props.settings.drinking;
+    const slokken = ['een slok', 'twee slokken', 'drie slokken', 'een shotje', 'een adje'];
+    const rand = Math.floor(Math.random() * 101);
+
+    if (rand >= setting) {
+      return slokken[0];
     }
+    setting = setting * setting /100;
+    if (rand >= setting) {
+      return slokken[1];
+    }    
+    setting = setting * setting /100;
+    if (rand >= setting) {
+      return slokken[2];
+    }    
+    setting = setting * setting /100;
+    if (rand >= setting) {
+      return slokken[3];
+    }
+    return slokken[4];
   }
 
   nextPlayers(number) {
@@ -114,28 +153,48 @@ class Game extends React.Component{
     if (type < total) {
       const players = this.nextPlayers(1);
       const card = this.soloFac.getCard(this.getSlokken(), players[0].name, players[0].male);
-      this.setState({currentCard: card, currentPlayers: players});
+      this.setState({currentCard: card, currentPlayers: players});     
+      
+      if (this.soloFac.cardCount() === 0) {
+        this.props.changeSetting("solo", 0);
+      }
+
       return;
     } 
     total += this.props.settings.duo;
     if (type < total) {
       const players = this.nextPlayers(2);
       const card = this.duoFac.getCard(this.getSlokken(), players[0].name, players[1].name, players[0].male, players[1].male);
-      this.setState({currentCard: card, currentPlayers: players});
+      this.setState({currentCard: card, currentPlayers: players});     
+      
+      if (this.duoFac.cardCount() === 0) {
+        this.props.changeSetting("duo", 0);
+      }
+
       return;
     }
     total += this.props.settings.group;
     if (type < total) {
       const players = this.players.slice().map(x => x.player);
       const card = this.groupFac.getCard(this.getSlokken());
-      this.setState({currentCard: card, currentPlayers: players});
+      this.setState({currentCard: card, currentPlayers: players});     
+      
+      if (this.groupFac.cardCount() === 0) {
+        this.props.changeSetting("group", 0);
+      }
+
       return;
     }
     total += this.props.settings.nhie;
     if (type < total) {
       const players = this.players.slice().map(x => x.player);
       const card = this.nhieFac.getCard(this.getSlokken());
-      this.setState({currentCard: card, currentPlayers: players});      
+      this.setState({currentCard: card, currentPlayers: players});        
+      
+      if (this.nhieFac.cardCount() === 0) {
+        this.props.changeSetting("nhie", 0);
+      }
+   
       return;
     }
     total += this.props.settings.stayingSolo;
@@ -145,7 +204,12 @@ class Game extends React.Component{
       const cards = this.stayingSoloFac.getCard(this.getSlokken(), players[0].name, players[0].male);
       stayingCards = this.state.stayingCards;
       stayingCards.push(cards[1]);
-      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});      
+      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});        
+      
+      if (this.stayingSoloFac.cardCount() === 0) {
+        this.props.changeSetting("stayingSolo", 0);
+      }
+
       return;
     }
     total += this.props.settings.stayingDuo;
@@ -154,15 +218,32 @@ class Game extends React.Component{
       const cards = this.stayingDuoFac.getCard(this.getSlokken(), players[0].name, players[1].name, players[0].male, players[1].male);
       stayingCards = this.state.stayingCards;
       stayingCards.push(cards[1]);
-      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});      
+      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});     
+      
+      if (this.stayingDuoFac.cardCount() === 0) {
+        this.props.changeSetting("stayingDuo", 0);
+      }
+
       return;
-    }    
+    }  
     
-    const players = this.players.slice().map(x => x.player);
-    const cards = this.stayingGroupFac.getCard(this.getSlokken());
-    stayingCards = this.state.stayingCards;
-    stayingCards.push(cards[1]);
-    this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});    
+    total += this.props.settings.stayingGroup;
+    if (type < total) {     
+      const players = this.players.slice().map(x => x.player);
+      const cards = this.stayingGroupFac.getCard(this.getSlokken());
+      stayingCards = this.state.stayingCards;
+      stayingCards.push(cards[1]);
+      this.setState({currentCard: cards[0], currentPlayers: players, stayingCards: stayingCards});         
+        
+      if (this.stayingGroupFac.cardCount() === 0) {
+        this.props.changeSetting("stayingGroup", 0);
+      }
+
+      return;
+    }
+
+    alert("Out of cards, reset settings to continue")
+
   };
 
   render() {

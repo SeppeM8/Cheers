@@ -6,7 +6,7 @@
 }
 
 .slider-box {
-  margin-bottom: 10px;
+  height: 60px;
 }
 
 .slider-title {
@@ -51,13 +51,13 @@
 }
 
 .reset-button {
-  height: 55px;  
+  height: 50px;  
   float: left;
 }
 
 .save-button {
-  height: 55px;
-  margin-left: 20px;  
+  height: 50px;
+  margin-left: 10px;  
 }
 
 .settings-screen {
@@ -71,6 +71,15 @@
   border-radius: 50px;
   background: linear-gradient(45deg, rgba(4,5,33,1) 0%, rgba(58,7,110,1) 100% );
   border: 5px solid white;
+
+  
+  /* Unselectable */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .row {
@@ -95,9 +104,6 @@
   right: 0;
 }
 
-.drinking-slider {
-  width: 455px;
-}
 
 .settings-background {
   z-index: 100;
@@ -110,4 +116,8 @@
   height: 100%;
 
   background: rgba(0, 0, 0, 0.3);
+}
+
+.hspace {
+  height: 25px;
 }

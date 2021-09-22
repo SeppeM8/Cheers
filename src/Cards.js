@@ -37,14 +37,14 @@ const soloCards = [
 'Kop of munt! Als {1} juist is drinkt de groep {0}, anders drinkt {1} {0}',
 'Dobbel met een dobbelsteen, aantal ogen = aantal slokken voor {1}',
 '{1}, ga melk vragen bij de buren of drink je glas leeg',
-'{1}, spin the bottle op wie het landt moet je een zoen geven. Anders 3 slokken',
+'{1}, spin the bottle op wie het landt moet je een zoen geven. Anders drie slokken',
 '{1} ontvriendt een van je ouders op fb of drink {0}',
 'Iedereen groter dan {1} drinkt {0}',
 'Iedereen kleiner dan {1} drinkt {0}',
 'Iemand zet een bekend liedje op (bijvoorbeeld K3 song) en stopt op willekeurig moment. Kan {1} niet verder zingen, dan post {2, choice, 0#hij|1#zij} zichzelf al zingend op social media of drinkt een adje',
 '{1} beeldt iets uit, indien niemand het raadt dan drink je zelf {0}, anders mag diegene die het raadt {0} uitdelen',
-'Per lettertype dat {1} kan opnoemen mag {2, choice, 0#hij|1#zij} een persoon een slok laten drinken',
-'Per wereldwonder dat {1} kent mag {2, choice, 0#hij|1#zij} een persoon een slok laten drinken',
+'Per lettertype dat {1} kan opnoemen mag {2, choice, 0#hij|1#zij} een persoon naar keuze een slok laten drinken',
+'Per wereldwonder dat {1} kent, mag {2, choice, 0#hij|1#zij} een persoon een slok laten drinken',
 '{1}, doe een beetje drinken van de persoon rechts en links van jou in jouw glas',
 '{1} maakt een heksendrankje (combineer wat je maar wil, wees creatief) - de eerste persoon die moet atten doet dit van de heksendrank of trakteert {1} op een drankje naar keuze',
 '{1}, neem een slok met een gestrekte arm',
@@ -64,7 +64,7 @@ const duoCards = [
 '{1} en {2}, doe de macarena, de groep beslist wie het het meest sexy uitvoert. De verliezer verliest een kledingstuk',
 '{1} doe een bodyshot bij {2}',
 '{1} en {2} drinken om de beurt van {1} zijn glas, degene die het glas eindigt mag een opdracht skippen',
-'{1} en {2}, maak een papieren vliegtuigje. Wie het verste vliegt mag {0} uidelen',
+'{1} en {2}, maak een papieren vliegtuigje. Wie het verste vliegt mag {0} uitdelen',
 '{1}, wissel je glas met {2}'
 ];
 
@@ -90,7 +90,6 @@ const groupCards = [
 'Kijk allemaal naar de grond, tel af, kijk naar iemand. Wie in elkaars ogen kijken moeten {0} drinken',
 'Waterval!',
 'Piramide!',
-'Fuck the dealer!',
 'Gezamenlijk shotje!',
 'De grond is lava! Laatste die de grond nog aanraakt drinkt {0}',
 'Iedereen stemt hond of kat en minderheid drinkt {0}',
@@ -101,15 +100,22 @@ const groupCards = [
 'Limbotijd! Speel de limbo',
 'De laatste persoon op de toiletkamer drinkt {0}',
 'Zeg om de beurt een automerk, wie niet meer kan moet het zonder schoenen verder doen',
-'Noem om de beurt een porno categorie, wie niet meer kan moet een ronde op een persoon naar keus zijn schoot verder',
 'De persoon met de langste naam drinkt {0}',
-'De persoon met de grootste snor mag een snorretje tekenen bij iemand zonder of die persoon drinkt 2 slokken',
+'Diegene met de korste naam drinkt {0}',
+'De persoon met de grootste snor mag een snorretje tekenen bij iemand zonder of die persoon drinkt een shotje',
 'Iedereen schuift een plaats op met de klok mee',
 'Iedereen schuift een plaats op tegen de klok in',
 'Schrijf allemaal een aantal slokken op en doe de papiertjes in een kom. Trek elk een kaart en drink wat er op het kaartje staat',
 'De eerste persoon kiest een letter en begint met een land op te noemen dat met deze letter begint. Speel verder tot iemand geen land meer weet, deze drinkt {0}',
-'Zeg de naam van een personage van “avatar the last airbender”, wie niet kan aanvullen neemt 4 slokken met telkens een bijpassende move',
+'Zeg de naam van een personage van “avatar the last airbender”, wie niet kan aanvullen neemt vier slokken met telkens een bijpassende move',
 ]
+
+/*
+
+'Fuck the dealer!',
+'Noem om de beurt een porno categorie, wie niet meer kan moet een ronde op een persoon naar keus zijn schoot verder',
+
+*/
 
 const nhieCards = [
 'Ik heb nog nooit opgeschept over iets wat niet waar is',
@@ -130,9 +136,6 @@ const nhieCards = [
 'Ik heb nog nooit een valse naam gegeven',
 'Ik heb het nog nooit uit gemaakt via sms',
 'Ik heb nog nooit een vakantievriend(in) gehad',
-'Ik heb nog nooit sex gehad in een publieke plaats',
-'Ik heb nog nooit een sexy sms naar de verkeerde persoon gestuurd',
-'Ik ben nog nooit betrapt geweest tijdens sex/masturberen',
 'Ik heb nog nooit geweend tijdens een kinderfilm',
 'Ik heb nog nooit mijn ouders bezig gehoord in bed',
 'Ik heb nog nooit geslapen in gewone kleren',
@@ -155,33 +158,45 @@ const nhieCards = [
 'Ik heb geen alcohol gedronken voor ik 16 was',
 'Ik heb nog nooit gedanst op tafel',
 'Ik heb nog nooit een dronken sms gestuurd waar ik later spijt van had',
-'Ik ben nog nooit speels geweest met slagroom',
-'Ik heb nog nooit met mezelf gespeeld bij het kijken van Youtube videos',
 'Ik heb nog nooit gezegd dat ik nooit meer drink',
+];
+
+/*
+
+'Ik ben nog nooit betrapt geweest tijdens sex/masturberen',
+'Ik heb nog nooit met mezelf gespeeld bij het kijken van Youtube videos',
+'Ik ben nog nooit speels geweest met slagroom',
+'Ik heb nog nooit sex gehad in een publieke plaats',
+'Ik heb nog nooit een sexy sms naar de verkeerde persoon gestuurd',
 'Ik heb nog nooit gefantaseerd over iemand uit mijn klas',
 'Ik ben nog nooit speels geweest met choco'
-];
+
+*/
 
 // # min;max;opdracht;samenvatting met: 0 = slokken, 1 = persoon, 2 = man
 const stayingSoloCards = [
-  '1;2;Spreek geen Nederlands {1}, Als je betrapt wordt: drink {0};Als {1} Nederlands praat: {0}',
-  '1;2;Leugenaar! Als iemand {1} betrapt op de waarheid, drinkt {2, choice, 0#hij|1#zij} {0}; Als {1} de waarheid zegt: {0}',
-  '3;5;Elke keer {1} {2, choice, 0#zijn|1#haar} glas wilt bijvullen, moet {2, choice, 0#hij|1#zij} bewijzen dat {2, choice, 0#zijn|1#haar} glas leeg is door het omgekeerd boven {2, choice, 0#zijn|1#haar} hoofd te houden. Indien vergeten: adje; Als {1} {2, choice, 0#zijn|1#haar} glas leeg is: Boven hoofd, anders adje',
-  '2;4;{1} is duim{2, choice, 0#koning|1#koningin}. Als hij zijn duim op tafel legt moet iedereen volgen. Wie laatst is drinkt {0};{1} de duim{2, choice, 0#koning|1#duimkoningin}',
-  '1;2;{1} wordt vanaf nu aangesproken met {2, choice, 0#meneer|1#mevrouw} de geweldige superieure toffe mens, de eerste die dit niet doet moet op zijn knieën om vergiffenis vragen; Spreek {1} aan met {2, choice, 0#meneer|1#mevrouw} de geweldige superieure toffe mens, anders om vergiffenis vragen',
-  '1;2;Als {1} "euhm" zegt, moet {2, choice, 0#hij|1#zij} {0} drinken;Als {1} "euhm" zegt: {0}'
+  '5;10;Spreek geen Nederlands {1}, Als je betrapt wordt: drink {0};Als {1} Nederlands praat: {0}',
+  '5;15;Leugenaar! Als iemand {1} betrapt op de waarheid, drinkt {2, choice, 0#hij|1#zij} {0}; Als {1} de waarheid zegt: {0}',
+  '15;30;Elke keer {1} {2, choice, 0#zijn|1#haar} glas wilt bijvullen, moet {2, choice, 0#hij|1#zij} bewijzen dat {2, choice, 0#zijn|1#haar} glas leeg is door het omgekeerd boven {2, choice, 0#zijn|1#haar} hoofd te houden. Indien vergeten: adje; Als {1} {2, choice, 0#zijn|1#haar} glas leeg is: Boven hoofd, anders adje',
+  '5;13;{1} is duim{2, choice, 0#koning|1#koningin}. Als hij zijn duim op tafel legt moet iedereen volgen. Wie laatst is drinkt {0};{1} de duim{2, choice, 0#koning|1#duimkoningin}',
+  '7;16;{1} wordt vanaf nu aangesproken met {2, choice, 0#meneer|1#mevrouw} de geweldige superieure toffe mens, de eerste die dit niet doet moet op zijn knieën om vergiffenis vragen; Spreek {1} aan met {2, choice, 0#meneer|1#mevrouw} de geweldige superieure toffe mens, anders om vergiffenis vragen',
+  '5;18;Als {1} "euhm" zegt, moet {2, choice, 0#hij|1#zij} {0} drinken;Als {1} "euhm" zegt: {0}',
+  '10;25;{1} is ober en voorziet iedereen van drinken;{1} de ober',
+  '15;35;{1} mag een drinkpartner kiezen;{1} met drinkpartner'
 ];
 
 // # min;max;opdracht;samenvatting met: 0 = slokken, 1 = player1, 2 = player2, 3 = man1, 4 = man2
 const stayingDuoCards = [
-  '3;7;{1} en {2} zijn drinkpartners;{1} en {2} zijn drinkpartners',
-  '1;2;{1} en {2} moeten elkaars handen vasthouden;{1} en {2} moeten handen vasthouden'
+  '15;35;{1} en {2} zijn drinkpartners;{1} en {2} zijn drinkpartners',
+  '5;15;{1} en {2} moeten elkaars handen vasthouden;{1} en {2} moeten handen vasthouden',
+  '5;6;{1} en {2} kijken een hele ronde in elkaars ogen;Tortelduifjes {1} en {2}',
+  '7;19;{1} is {2} {4, choice, 0#zijn|1#haar} butler;{1} is butler van {2}'
 ];
 
 // # min;max;opdracht;samenvatting met: 0 = slokken
 const stayingGroupCards = [
-  '1;5;Wie betrapt wordt met zijn telefoon in de hand drinkt {0};GSM = {0}',
-  '1;1;Alle slokken zijn dubbel;Dubbele slokken'
+  '6;25;Wie betrapt wordt met zijn telefoon in de hand drinkt {0};GSM = {0}',
+  '5;7;Alle slokken zijn deze ronde dubbel;Dubbele slokken'
 ]
 
 
@@ -352,8 +367,9 @@ class NhieCard extends React.Component {
 }
 
 class StayingSoloFactory {
-  constructor(playerCount) {
-    this.playerCount = playerCount;
+  constructor(removeStaying, game) {
+    this.removeStaying = removeStaying;
+    this.game = game;
     this.cards = stayingSoloCards.slice();
     shuffleArray(this.cards);
   }
@@ -368,8 +384,8 @@ class StayingSoloFactory {
 
     var text = this.cards.pop();
 
-    const min = this.playerCount * text.match(/(^[^;]+)/)[0];
-    const max = this.playerCount * text.match(/^[^;]+;([^;]+);/)[1];
+    const min = text.match(/(^[^;]+)/)[0];
+    const max = text.match(/^[^;]+;([^;]+);/)[1];
     var samenvatting = text.match(/^[^;]+;[^;]+;[^;]+;(.*)$/)[1]
 
     text = text.match(/^[^;]+;[^;]+;(.*);.*$/)[1];
@@ -389,8 +405,10 @@ class StayingSoloFactory {
     else {
       samenvatting = samenvatting.replaceAll(/{2, choice, 0#[^|]*\|1#(\w+)\}/g, '$1');
     }
-    
-    return [<StayingSoloCard text={text} />, {card:<MiniSoloCard text={samenvatting} key={getMiniID()}/>, turns:getRandomInt(min, max)}];
+
+    const key = getMiniID();
+  
+    return [<StayingSoloCard text={text} />, {card:<MiniSoloCard text={samenvatting} key={key} sleutel={key} game={this.game} removeStaying={this.removeStaying}/>, turns:getRandomInt(min, max)}];
   }
 
   cardCount() {
@@ -411,7 +429,7 @@ class StayingSoloCard extends React.Component {
 class MiniSoloCard extends React.Component {
   render() {
     return (
-      <div className="mini-solo-card mini-card">
+      <div className="mini-solo-card mini-card" onClick={() => this.props.removeStaying(this.props.game, this.props.sleutel)}>
           <span>{this.props.text}</span>
       </div>
     );
@@ -421,8 +439,9 @@ class MiniSoloCard extends React.Component {
 // # min;max;opdracht;samenvatting met: 0 = slokken, 1 = player1, 2 = player2, 3 = man1, 4 = man2
 
 class StayingDuoFactory {
-  constructor(playerCount) {
-    this.playerCount = playerCount;
+  constructor(removeStaying, game) {
+    this.removeStaying = removeStaying;
+    this.game = game;
     this.cards = stayingDuoCards.slice();
     shuffleArray(this.cards);
   }
@@ -436,8 +455,8 @@ class StayingDuoFactory {
 
     var text = this.cards.pop();
 
-    const min = this.playerCount * text.match(/(^[^;]+)/)[0];
-    const max = this.playerCount * text.match(/^[^;]+;([^;]+);/)[1];
+    const min = text.match(/(^[^;]+)/)[0];
+    const max = text.match(/^[^;]+;([^;]+);/)[1];
     var samenvatting = text.match(/^[^;]+;[^;]+;[^;]+;(.*)$/)[1]
     text = text.match(/^[^;]+;[^;]+;(.*);.*$/)[1];
 
@@ -468,8 +487,10 @@ class StayingDuoFactory {
     else {
       samenvatting = samenvatting.replaceAll(/{4, choice, 0#[^|]*\|1#(\w+)\}/g, '$1');
     }
+
+    const key = getMiniID();
     
-    return [<StayingDuoCard text={text} />, {card:<MiniDuoCard text={samenvatting} key={getMiniID()}/>, turns:getRandomInt(min, max)}];
+    return [<StayingDuoCard text={text} />, {card:<MiniDuoCard text={samenvatting} key={key} sleutel={key} game={this.game} removeStaying={this.removeStaying}/>, turns:getRandomInt(min, max)}];
   }
 
   cardCount() {
@@ -490,7 +511,7 @@ class StayingDuoCard extends React.Component {
 class MiniDuoCard extends React.Component {
   render() {
     return (
-      <div className="mini-duo-card mini-card">
+      <div className="mini-duo-card mini-card"  onClick={() => this.props.removeStaying(this.props.game, this.props.sleutel)}>
           <span>{this.props.text}</span>
       </div>
     );
@@ -501,13 +522,14 @@ class MiniDuoCard extends React.Component {
 // # min;max;opdracht;samenvatting met: 0 = slokken
 
 class StayingGroupFactory {
-  constructor(playerCount) {
-    this.playerCount = playerCount;
+  constructor(removeStaying, game) {
+    this.removeStaying = removeStaying;
+    this.game = game;
     this.cards = stayingGroupCards.slice();
     shuffleArray(this.cards);
   }
 
-  getCard(slokken, name1, name2, male1, male2) {
+  getCard(slokken) {
 
     if (this.cards.length === 0) {
       this.cards = stayingGroupCards.slice();
@@ -516,15 +538,17 @@ class StayingGroupFactory {
 
     var text = this.cards.pop();
 
-    const min = this.playerCount * text.match(/(^[^;]+)/)[0];
-    const max = this.playerCount * text.match(/^[^;]+;([^;]+);/)[1];
+    const min = text.match(/(^[^;]+)/)[0];
+    const max = text.match(/^[^;]+;([^;]+);/)[1];
     var samenvatting = text.match(/^[^;]+;[^;]+;[^;]+;(.*)$/)[1]
     text = text.match(/^[^;]+;[^;]+;(.*);.*$/)[1];
 
     text = text.replaceAll('{0}', slokken);
     samenvatting = samenvatting.replaceAll('{0}', slokken);
+
+    const key = getMiniID();
     
-    return [<StayingGroupCard text={text} />, {card:<MiniGroupCard text={samenvatting} key={getMiniID()}/>, turns:getRandomInt(min, max)}];
+    return [<StayingGroupCard text={text} />, {card:<MiniGroupCard text={samenvatting} key={key} sleutel={key} game={this.game} removeStaying={this.removeStaying}/>, turns:getRandomInt(min, max)}];
   }
 
   cardCount() {
@@ -545,7 +569,7 @@ class StayingGroupCard extends React.Component {
 class MiniGroupCard extends React.Component {
   render() {
     return (
-      <div className="mini-group-card mini-card">
+      <div className="mini-group-card mini-card" onClick={() => this.props.removeStaying(this.props.game, this.props.sleutel)}>
           <span>{this.props.text}</span>
       </div>
     );

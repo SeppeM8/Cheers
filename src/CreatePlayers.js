@@ -42,7 +42,7 @@ class CreatePlayers extends React.Component {
 
 
     // DEBUG =======
-    if (true) {
+    if (false) {
       this.state.players = [
         {name: 'Seppe', male: true, avatar: 'Avatar01.png'},
         {name: 'Falco', male: true, avatar: 'Avatar02.png'},
@@ -169,7 +169,7 @@ class CreatePlayers extends React.Component {
     }
 
     return (
-      <div style={{margin: '10px'}}> 
+      <div> 
         {this.getPlayerTable()}
         <div className='data'>
           <div className='avatar'>

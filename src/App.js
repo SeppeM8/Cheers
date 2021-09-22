@@ -27,19 +27,27 @@ class App extends React.Component {
     this.resetSettings = this.resetSettings.bind(this);
   }
 
-  changeSetting(key, value) { 
-    var settings = this.state.settings;
-    settings.total += value - settings[key];
-    settings[key] = parseFloat(value);
+  changeSetting(key, value) {
+    var settings = this.state.settings; 
+    if (key=== "order" || key === "drinking") {
+      settings[key] = value;
+    } else {      
+      settings.total += value - settings[key];
+      settings[key] = parseFloat(value);
+
+    }
     this.setState({settings: settings});
   }  
 
   resetSettings(init) {
     var drinking;
+    var order;
     if (init) {
       drinking = 50;
+      order = { value: 'semiRandom', label: 'Semi-random'};
     } else {
       drinking = this.state.settings.drinking;
+      order = this.state.settings.order;
     }
     const counts = getCardCounts();
     var max = 0;
@@ -49,7 +57,7 @@ class App extends React.Component {
         max = counts[key];
       }
     }
-    var settings = {drinking: drinking};
+    var settings = {drinking: drinking, order: order};
     var total = 0;
     for (key in counts) {
       settings[key] = counts[key]/max*100;
@@ -108,6 +116,7 @@ class App extends React.Component {
           players={this.state.players}
           settings={this.state.settings}
           gotoSettings={this.gotoSettings}
+          changeSetting={this.changeSetting}
         />
       </div>
     )
