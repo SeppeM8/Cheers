@@ -29,17 +29,20 @@ class Game extends React.Component{
     this.stayingDuoFac = new StayingDuoFactory(this.removeStaying, self);
     this.stayingGroupFac = new StayingGroupFactory(this.removeStaying, self);
 
-    this.players = [];
+    this.playersPool = [];
+    this.playerindex = 0;
+
     for (var player of this.props.players){
-      this.players.push({count: 1, player: player});
+      this.playersPool.push(player);
+      this.playersPool.push(player);
     }
+    this.playersPool.sort(() => 0.5 - Math.random());
 
     this.state = {
-      currentPlayers: [], 
+      currentPlayers: [],
       stayingCards: [],
       settings: false
     };
-
 
     this.getSlokken = this.getSlokken.bind(this);
     this.nextCard = this.nextCard.bind(this);    
@@ -72,7 +75,17 @@ class Game extends React.Component{
     }
   }
 
-  getSlokken() {
+  testPlayers() {
+    console.log("-------------------------------------------------");
+    var counts = {};
+    for (var i = 0; i <= 100; i++) {
+      var player = this.nextPlayers(1)[0].name;
+      counts[player] = counts[player] ? counts[player] + 1 : 1;
+    }
+    console.log(counts)
+  }
+
+  getSlokken() { 
     var setting = this.props.settings.drinking;
     const slokken = ['een slok', 'twee slokken', 'drie slokken', 'een shotje', 'een adje'];
     const rand = Math.floor(Math.random() * 101);
@@ -96,42 +109,44 @@ class Game extends React.Component{
   }
 
   nextPlayers(number) {
-    var allPlayers = this.players.slice();
-    var nextPlayers = [];
-    var player;
 
-    for (var i = 0; i < number; i++) {
-      var total = 0;
-      var chanches = [];
-      for (player of allPlayers) {
-        total += 1.0/player.count;
-        chanches.push({chanche: (1.0/player.count), player: player.player});
+    var nextPlayers = [];
+    var i;
+
+    if (this.props.settings.order.value === "strict") {
+      for (i = 0; i < number; i++) {
+        nextPlayers.push(this.props.players[this.playerindex]);
+        this.playerindex = (this.playerindex + 1) % this.props.players.length;
+      }
+      return nextPlayers;
+    }
+
+    if (this.props.settings.order.value === "random") {
+      var shuffled = this.props.players.slice().sort(() => 0.5 - Math.random());
+      for (i = 0; i < number; i++) {
+        nextPlayers.push(shuffled[i])
+      }
+      return nextPlayers;      
+    }
+
+    var nextPlayersNames = [];
+
+    
+    while (nextPlayers.length < number) {
+      var player = this.playersPool.shift(); 
+      if (nextPlayersNames.includes(player.name)) {
+        this.playersPool.push(player);
+      } else {
+        nextPlayersNames.push(player.name);
+        nextPlayers.push(player);
       }
 
-      const random = Math.random()*total;
-  
-      var current = 0;
-      for (var chanche of chanches) {
-        current += chanche.chanche;
-        if (random <= current) {
-          nextPlayers.push(chanche.player);
-          for (player of this.players) {
-            if (player.player === chanche.player) {
-              player.count += 1;
-            }
-          }
-
-          var newPlayers = [];
-          for (player of allPlayers) {
-            if (player.player !== chanche.player) {
-              newPlayers.push(player);
-            }
-          }
-          allPlayers = newPlayers;
-          break;
-        }
+      if (this.playersPool.length <= this.props.players.length) {
+        this.playersPool.push(...this.props.players);
+        this.playersPool.sort(() => 0.5 - Math.random());
       }
     }
+
     return nextPlayers;        
   }
 
@@ -175,7 +190,7 @@ class Game extends React.Component{
     }
     total += this.props.settings.group;
     if (type < total) {
-      const players = this.players.slice().map(x => x.player);
+      const players = this.props.players.slice();
       const card = this.groupFac.getCard(this.getSlokken());
       this.setState({currentCard: card, currentPlayers: players});     
       
@@ -187,7 +202,7 @@ class Game extends React.Component{
     }
     total += this.props.settings.nhie;
     if (type < total) {
-      const players = this.players.slice().map(x => x.player);
+      const players = this.props.players.slice();
       const card = this.nhieFac.getCard(this.getSlokken());
       this.setState({currentCard: card, currentPlayers: players});        
       
@@ -229,7 +244,7 @@ class Game extends React.Component{
     
     total += this.props.settings.stayingGroup;
     if (type < total) {     
-      const players = this.players.slice().map(x => x.player);
+      const players = this.props.players.slice();
       const cards = this.stayingGroupFac.getCard(this.getSlokken());
       stayingCards = this.state.stayingCards;
       stayingCards.push(cards[1]);

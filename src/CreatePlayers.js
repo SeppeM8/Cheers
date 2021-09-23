@@ -53,7 +53,7 @@ class CreatePlayers extends React.Component {
         {name: 'Jordy', male: true, avatar: 'Avatar08.png'},
         {name: 'Alice', male: false, avatar: 'Avatar07.png'},
       ];
-      //this.play();
+      this.play();
     }
     // =============
   }

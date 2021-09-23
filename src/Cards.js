@@ -57,7 +57,7 @@ const duoCards = [
 '{1} mag iets tekenen op {2}',
 '{1} en {2}, geef elkaar een zoen',
 '{1} drinkt zoveel slokken als {3, choice, 0#hij|1#zij} wilt, {2} drinkt er dubbel zoveel',
-'{1}, doe wat {2} zegt, als je het niet kan, drink {0}',
+'{1}, doe wat {2} zegt. Als je het niet kan, drink {0}',
 '{1} en {2} wisselen van gsm en verzenden een bericht',
 '{1} en {2}, Neem om ter eerst een slok zonder handen of armen te gebruiken',
 '{1} wissel van plaats met {2}',
@@ -108,13 +108,11 @@ const groupCards = [
 'Schrijf allemaal een aantal slokken op en doe de papiertjes in een kom. Trek elk een kaart en drink wat er op het kaartje staat',
 'De eerste persoon kiest een letter en begint met een land op te noemen dat met deze letter begint. Speel verder tot iemand geen land meer weet, deze drinkt {0}',
 'Zeg de naam van een personage van “avatar the last airbender”, wie niet kan aanvullen neemt vier slokken met telkens een bijpassende move',
+'Fuck the dealer!',
+'Noem om de beurt een porno categorie, wie niet meer kan moet een ronde op een persoon naar keus zijn schoot verder',
 ]
 
 /*
-
-'Fuck the dealer!',
-'Noem om de beurt een porno categorie, wie niet meer kan moet een ronde op een persoon naar keus zijn schoot verder',
-
 */
 
 const nhieCards = [
@@ -159,10 +157,6 @@ const nhieCards = [
 'Ik heb nog nooit gedanst op tafel',
 'Ik heb nog nooit een dronken sms gestuurd waar ik later spijt van had',
 'Ik heb nog nooit gezegd dat ik nooit meer drink',
-];
-
-/*
-
 'Ik ben nog nooit betrapt geweest tijdens sex/masturberen',
 'Ik heb nog nooit met mezelf gespeeld bij het kijken van Youtube videos',
 'Ik ben nog nooit speels geweest met slagroom',
@@ -170,7 +164,9 @@ const nhieCards = [
 'Ik heb nog nooit een sexy sms naar de verkeerde persoon gestuurd',
 'Ik heb nog nooit gefantaseerd over iemand uit mijn klas',
 'Ik ben nog nooit speels geweest met choco'
+];
 
+/*
 */
 
 // # min;max;opdracht;samenvatting met: 0 = slokken, 1 = persoon, 2 = man
