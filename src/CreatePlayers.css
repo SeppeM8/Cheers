@@ -58,12 +58,6 @@
   height: 70px;
 }
 
-.hbox {
-  display: table;
-  margin: 15px auto;
-  position: relative;
-}
-
 .name-field{
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -118,3 +112,4 @@
   right: -15px;
   bottom: -15px;
 }
+

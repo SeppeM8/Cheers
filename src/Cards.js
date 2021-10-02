@@ -68,7 +68,7 @@ const duoCards = [
 '{1}, wissel je glas met {2}'
 ];
 
-//# 0 = slokken
+//# 0 = slokken, 1 = player1, 2 = man1
 const groupCards = [
 'Doe met z\'n allen een dansje',
 'Wie ooit voetbal heeft gespeeld/speelt, drinkt {0}',
@@ -79,13 +79,13 @@ const groupCards = [
 'Wie een hond heeft, drinkt {0}',
 'Handen omhoog! Wie laatst is drinkt {0}',
 'Iedereen drinkt {0} en leest zijn laatste verzonden bericht voor naar iemand buiten deze groep',
-'Ik ga kamperen en neem mee… De eerste die verkeerd is drinkt {0}',
+'Ik ga kamperen en neem mee… De eerste die verkeerd is drinkt {0}. We beginnen bij {1}',
 'Als je ooit iemand gekust hebt uit deze groep, drink {0}',
 'Wie de skinnieste broek draagt, drinkt {0}',
 'Sta recht! Wie laatst is, drinkt {0}',
 'Wie fruitsap drinkt, drinkt {0}',
 'Wie deze avond iets gemorst heeft, drinkt {0}',
-'Wijs allemaal naar een speler, diegene die het meest is aangeduid drinkt {0}',
+'Wijs allemaal tegelijk naar een speler, diegene die het meest is aangeduid drinkt {0}',
 'Degene met 1 lettergreep in hun naam, drinken {0}',
 'Kijk allemaal naar de grond, tel af, kijk naar iemand. Wie in elkaars ogen kijken moeten {0} drinken',
 'Waterval!',
@@ -99,17 +99,18 @@ const groupCards = [
 'Raak het plafond! Laatste drinkt {0}',
 'Limbotijd! Speel de limbo',
 'De laatste persoon op de toiletkamer drinkt {0}',
-'Zeg om de beurt een automerk, wie niet meer kan moet het zonder schoenen verder doen',
+'Zeg om de beurt een automerk, wie niet meer kan aanvullen moet zonder schoenen verder spelen. {1} begint',
 'De persoon met de langste naam drinkt {0}',
 'Diegene met de korste naam drinkt {0}',
 'De persoon met de grootste snor mag een snorretje tekenen bij iemand zonder of die persoon drinkt een shotje',
 'Iedereen schuift een plaats op met de klok mee',
 'Iedereen schuift een plaats op tegen de klok in',
 'Schrijf allemaal een aantal slokken op en doe de papiertjes in een kom. Trek elk een kaart en drink wat er op het kaartje staat',
-'De eerste persoon kiest een letter en begint met een land op te noemen dat met deze letter begint. Speel verder tot iemand geen land meer weet, deze drinkt {0}',
+'{1} kiest een letter en begint met een land op te noemen dat met deze letter begint. Speel verder tot iemand geen land meer weet, deze drinkt {0}',
 'Zeg de naam van een personage van “avatar the last airbender”, wie niet kan aanvullen neemt vier slokken met telkens een bijpassende move',
 'Fuck the dealer!',
-'Noem om de beurt een porno categorie, wie niet meer kan moet een ronde op een persoon naar keus zijn schoot verder',
+'Noem om de beurt een porno categorie, wie niet meer kan aanvullen moet een ronde op een persoon naar keus zijn schoot verder. {1} begint',
+'Hoedje op! Wie eerst was drinkt {0}'
 ]
 
 /*
@@ -140,7 +141,6 @@ const nhieCards = [
 'Ik heb nog nooit een cartoon character sexy gevonden',
 'Ik heb nog nooit candy Crush gespeeld',
 'Ik heb nog nooit een duck face gemaakt bij een selfie',
-'Ik heb nog nooit een sms herlezen nadat hij juist verzonden is',
 'Ik heb nog nooit een cadeau doorgegeven die ik niet leuk vond',
 'Ik heb nog nooit mijn zonnenbril gezocht terwijl hij op mijn hoofd stond',
 'Ik heb nog nooit gelogen over mijn leeftijd',
@@ -300,7 +300,7 @@ class GroupFactory{
     shuffleArray(this.cards);
   }
 
-  getCard(slokken) { // TODO toch naam voor sommigen
+  getCard(slokken, name1, male1) {
 
     if (this.cards.length === 0) {
       this.cards = groupCards.slice();
@@ -308,8 +308,17 @@ class GroupFactory{
     }
 
     var text = this.cards.pop();
+    var usedPlayer = text.includes("{1}");
+    text = text.replaceAll('{0}', slokken).replaceAll('{1}', name1)
 
-    return <Groupcard text={text.replaceAll('{0}', slokken)} />;
+    if (male1) {
+      text = text.replaceAll(/{2, choice, 0#(\w+)\|[^}]*\}/g, '$1');
+    }
+    else {
+      text = text.replaceAll(/{2, choice, 0#[^|]*\|1#(\w+)\}/g, '$1');
+    }
+
+    return {card: <Groupcard text={text}/>, usedPlayer: usedPlayer};
   }
 
   cardCount() {

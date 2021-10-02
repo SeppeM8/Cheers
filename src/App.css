@@ -1,6 +1,3 @@
-.App {
-  text-align: center;
-}
 
 .App-logo {
   height: 40vmin;
@@ -44,4 +41,23 @@ html {
   -o-background-size: cover;
   background-size: cover;
   color:white;
+}
+
+.suggestions {
+  position: fixed;
+  left: 50%;
+  bottom: 0px;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  color: rgb(190, 190, 190);
+}
+
+.suggestions a {
+  color: rgb(0, 130, 206);
+}
+
+.hbox {
+  display: table;
+  margin: 15px auto;
+  position: relative;
 }

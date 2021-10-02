@@ -131,6 +131,10 @@ class Game extends React.Component{
 
     var nextPlayersNames = [];
 
+    if ( new Set(this.playersPool).size < number) {
+      this.playersPool.push(...this.props.players);
+      this.playersPool.sort(() => 0.5 - Math.random());
+    }
     
     while (nextPlayers.length < number) {
       var player = this.playersPool.shift(); 
@@ -191,9 +195,14 @@ class Game extends React.Component{
     total += this.props.settings.group;
     if (type < total) {
       const players = this.props.players.slice();
-      const card = this.groupFac.getCard(this.getSlokken());
-      this.setState({currentCard: card, currentPlayers: players});     
+      const cardPlayer = this.nextPlayers(1);
+      const card = this.groupFac.getCard(this.getSlokken(), cardPlayer[0].name, cardPlayer[0].male);
+      this.setState({currentCard: card.card, currentPlayers: players});     
       
+      if (!card.usedPlayer) {
+        this.playersPool.push(cardPlayer[0]);
+      }
+
       if (this.groupFac.cardCount() === 0) {
         this.props.changeSetting("group", 0);
       }

@@ -105,6 +105,10 @@ class App extends React.Component {
             startGame={(players) => this.startGame(players)}
             gotoSettings={this.gotoSettings}
           />
+          
+          <div className="suggestions">
+            Stel nieuwe kaarten voor: <a href="https://forms.gle/Kt7AGReuFAyBwsvF6" target="_blank" rel="noreferrer">Form</a>
+          </div>
         </div>
       );
     }
@@ -118,6 +122,10 @@ class App extends React.Component {
           gotoSettings={this.gotoSettings}
           changeSetting={this.changeSetting}
         />
+        
+        <div className="suggestions">
+          Stel nieuwe kaarten voor: <a href="https://forms.gle/Kt7AGReuFAyBwsvF6" target="_blank" rel="noreferrer">Form</a>
+        </div>
       </div>
     )
   }
