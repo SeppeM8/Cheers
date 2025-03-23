@@ -310,7 +310,7 @@ class PlayerBarItem extends React.Component {
     if (this.props.currentPlayers.includes(this.props.player)) {
       return (
         <div className='playerbar-item'>
-          <img key={this.props.player.avatar} src={images[this.props.player.avatar].default} alt={this.props.player.avatar}/>
+          <img key={this.props.player.avatar} src={images[this.props.player.avatar]} alt={this.props.player.avatar}/>
           <div>{this.props.player.name}</div>
         </div>
       )
@@ -318,7 +318,7 @@ class PlayerBarItem extends React.Component {
 
     return (
       <div className='playerbar-item playerbar-item-hidden'>
-        <img key={this.props.player.avatar} src={images[this.props.player.avatar].default} alt={this.props.player.avatar}/>
+        <img key={this.props.player.avatar} src={images[this.props.player.avatar]} alt={this.props.player.avatar}/>
         <div>{this.props.player.name}</div>
       </div>
     )

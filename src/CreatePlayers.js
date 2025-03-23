@@ -173,7 +173,7 @@ class CreatePlayers extends React.Component {
         {this.getPlayerTable()}
         <div className='data'>
           <div className='avatar'>
-            <img src={images[this.state.avatar].default} onClick={() => this.choseAvatar()} alt='Avatar'/>
+            <img src={images[this.state.avatar]} onClick={() => this.choseAvatar()} alt='Avatar'/>
           </div> 
           <div className='hbox'>
             <input className="name-field" type='text' placeholder='Name' value={this.state.name} onChange={this.handleChange}/>
@@ -196,7 +196,7 @@ class PlayerItem extends React.Component {
   render() {
     return (
       <div className='player-item' onClick={() => this.props.onClick(this.props.player)}>
-        <img className='mini-avatar' key={this.props.player.avatar} src={images[this.props.player.avatar].default} alt={this.props.player.avatar}/>
+        <img className='mini-avatar' key={this.props.player.avatar} src={images[this.props.player.avatar]} alt={this.props.player.avatar}/>
         <div className='name'>{this.props.player.name} {this.props.player.male ? "(M)" : "(F)"}</div>
       </div>
     )
@@ -209,11 +209,12 @@ class AvatarPicker extends React.Component {
     return (
       <div className='grid-container'>
         {this.props.images.map((item, index) => {
-          return <img className='grid-item' key={item} src={images[item].default} onClick={() => this.props.onClick(item)} alt={item}/>
+          return <img className='grid-item' key={item} src={images[item]} onClick={() => this.props.onClick(item)} alt={item}/>
         })}
       </div>
     )
   }
 }
+
 
 export {CreatePlayers}
